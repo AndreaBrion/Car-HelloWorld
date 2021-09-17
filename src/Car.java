@@ -2,7 +2,8 @@ public class Car {
         double speed = 0.0;
         double fuel = 0.0;
         double ltperKmh = 0.0;
-
+//      speed e fuel sono i campi dell'oggetto
+//      speed = speed + amount PUO' ESSERE FATTO  speed+=amount
         void refuel (double amount) {
             fuel = fuel + amount;
         }
@@ -26,20 +27,27 @@ public class Car {
         }
         public static void main(String[] args) {
             Car myCar = new Car();
-            myCar.accellerate(100);////           Car yourCar = myCar;
-            myCar.brake(30);
+            myCar.accellerate(100);
+//          Se scrivessimo
+//          Car yourCar = new Car();
+//          eseguendo "yourCar.accelerate(172);"
+//          yourCar avrebbe una velocità di 172, infatti
+//          "Car myCar = new Car();" crea un oggetto
+//          Qui i due oggetti sono distinti e con velocità distinte.
+//
+//          Se invece scrivessimo
+//          "Car yourCar = myCar;"
+//          eseguendo "yourCar.accelerate(172);"
+//          allora qui avremmo due variabili locali che puntano
+//          allo stesso oggetto (o anche "sono lo stesso oggetto").
+//          myCar  è una variabile locale puntatore che PUNTA all'oggetto.
+//          Qui quando modificando la velocità di yourCar modifico la velocità di myCar.
+//          Se cambiamo lo STATO di myCar allora lo cambiamo anche in yourCar.
+            myCar.brake(50);
             myCar.accellerate(50);
-            myCar.brake(200);
+            myCar.brake(100);
 
             System.out.println(myCar.fuel);
             System.out.println(myCar.speed);
         }
-
 }
-
-// speed e fuel sono i campi dell'oggetto
-// speed = speed + amount PUO' ESSERE FATTO  speed+=amount
-// Non è possibile modificare la struttura della classe (dal main?)
-// myCar contiene un riferimento all'oggetto myCar
-// infatti Car yourCar = myCar allora yourCar punta all'oggetto myCar
-// qui se cambiamo lo stato di myCar allora lo cambiamo anche in yourCar

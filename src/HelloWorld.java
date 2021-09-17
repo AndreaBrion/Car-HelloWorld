@@ -4,6 +4,9 @@ public class HelloWorld {
     }
 }
 
+//NB IMPORTANTE
+//Se portiamo il metodo main FUORI dalla classe HelloWorld, il metodo NON FUNZIONA
+//In Java tutti i metodi stanno DENTRO la classe di appartenenza!
 
 //Se dovessimo eseguire da linea di comando :
 //Aprire terminale, per entrare nella cartella del file sorgente scrivere :
