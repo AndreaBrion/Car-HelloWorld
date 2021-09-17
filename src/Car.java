@@ -26,8 +26,7 @@ public class Car {
         }
         public static void main(String[] args) {
             Car myCar = new Car();
-            myCar.accellerate(100);
-            Car yourCar = myCar;
+            myCar.accellerate(100);////           Car yourCar = myCar;
             myCar.brake(30);
             myCar.accellerate(50);
             myCar.brake(200);
