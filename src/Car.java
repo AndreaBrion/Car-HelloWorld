@@ -51,5 +51,3 @@ public class Car {
             System.out.println(myCar.speed);
         }
 }
-
-//Modifiche terminate - Fine lezione 1/2
