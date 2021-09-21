@@ -1,9 +1,7 @@
-public class Car {
+public class CarL3 {
         double speed = 0.0;
         double fuel = 0.0;
-        double ltperKmh = 0.0;
-//      speed e fuel sono i campi dell'oggetto
-//      speed = speed + amount PUO' ESSERE FATTO  speed+=amount
+        FuelType fuelType = null;
         void refuel (double amount) {
             fuel = fuel + amount;
         }
@@ -14,35 +12,31 @@ public class Car {
                 speed = speed - amount;
         }
         void accellerate (double amount) {
-            double fuelCons = amount*ltperKmh;
-            if (fuelCons < fuel) {
-                speed = speed + amount;
-                fuel = fuel - amount*ltperKmh;
+            double fuelCons = amount* fuelType.ltperKmh; //notiamo che ora per accedere al campo dobbiamo
+            if (fuelCons < fuel) {                      //accedere allo stato della classe (dati) FuelType
+                speed = speed + amount;                 //tramite l'oggetto ltperKmh
+                fuel = fuel - amount* fuelType.ltperKmh;
             }
             else {
-                double increaseSpeed = fuel / ltperKmh;
+                double increaseSpeed = fuel / fuelType.ltperKmh;
                 speed = speed + increaseSpeed;
                 fuel = 0;
             }
         }
+
         public static void main(String[] args) {
-            Car myCar = new Car();
+            //Car myCar = new Car()
+            //myCar.accellerate(100)
+            //Così non si verificava l'errore dato dall'accesso ad un campo null in quanto
+            //il costruttore era della classe Car, la quale non ha FuelType!
+            CarL3 myCar = new CarL3();
+            myCar.fuelType = new FuelType(); //Per evitare l'errore in compilazione dobbiamo creare un oggetto FuelType e inizializzarlo, qui lo creiamo
+            myCar.fuelType.type = "Diesel";  //Qui accediamo al campo dell'oggetto fuelType (oggetto di classe FuelType) e ci scriviamo dentro
+            myCar.fuelType.ltperKmh = 1.4;   // Sopra abbiamo fatto OggettoMyCar.OggettoFuelType(trovato come campo in OggettoCar).CampoType
+            myCar.fuelType.costPerLiter = 0.01;
+            //Se non inizializzassi ltperKmh e costPerLiter questi sarebbero tutti 0 o null 
+            myCar.refuel(2);
             myCar.accellerate(100);
-//          Se scrivessimo
-//          Car yourCar = new Car();
-//          eseguendo "yourCar.accelerate(172);"
-//          yourCar avrebbe una velocità di 172, infatti
-//          "Car myCar = new Car();" crea un oggetto
-//          Qui i due oggetti sono distinti e con velocità distinte.
-//
-//          Se invece scrivessimo
-//          "Car yourCar = myCar;"
-//          eseguendo "yourCar.accelerate(172);"
-//          allora qui avremmo due variabili locali che puntano
-//          allo stesso oggetto (o anche "sono lo stesso oggetto").
-//          myCar  è una variabile locale puntatore che PUNTA all'oggetto.
-//          Qui quando modificando la velocità di yourCar modifico la velocità di myCar.
-//          Se cambiamo lo STATO di myCar allora lo cambiamo anche in yourCar.
             myCar.brake(50);
             myCar.accellerate(50);
             myCar.brake(100);
@@ -51,3 +45,6 @@ public class Car {
             System.out.println(myCar.speed);
         }
 }
+
+//Volendo approfondire l'interazione fra oggetti : Supponendo di volere diversi tipi di carburante
+//Serve una classe a sè : FuelType
