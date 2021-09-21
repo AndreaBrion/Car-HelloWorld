@@ -24,11 +24,15 @@ public class CarL3 {
                 fuel = fuel - amount* fuelType.ltperKmh;
             }
             else {
+                //stealfuel(this)              //Qui this è un puntatore ad un oggetto -> ciò rende possibile passare quel puntatore ad un altro metodo, come fosse una variabile locale! Il metodo viene eseguito sull'istanza dell'oggetto corrente
                 double increaseSpeed = fuel / fuelType.ltperKmh;
                 speed = speed + increaseSpeed;
                 fuel = 0;
             }
         }
+        //void stealFuel (Car c) {  //solo per capire sopra vedi "stealfuel(this)"
+        //   this.fuel = c.fuel+this.fuel;
+        // }
 
         public static void main(String[] args) {
             //Car myCar = new Car()
