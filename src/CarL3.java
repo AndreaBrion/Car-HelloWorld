@@ -2,7 +2,13 @@ public class CarL3 {
         double speed = 0.0;
         double fuel = 0.0;
         FuelType fuelType = null;
-        void refuel (double amount) {
+        CarL3(FuelType f) {            //Volendo evitare che il tipo di carburante venga inizializzato sempre a null creiamo un costruttore che lo inizializzi correttamente
+            fuelType = f;
+        }
+        CarL3() {         //fatto altrimenti il costruttore nel main dava errore
+        }
+        //E' possibile avere più costruttori, basta che non si sovrascrivano fra loro (qui la discriminante è se hanno gli stessi parametri -> stessa FIRMA)
+    void refuel (double amount) {
             fuel = fuel + amount;
         }
         void brake (double amount) {
@@ -29,22 +35,25 @@ public class CarL3 {
             //myCar.accellerate(100)
             //Così non si verificava l'errore dato dall'accesso ad un campo null in quanto
             //il costruttore era della classe Car, la quale non ha FuelType!
-            CarL3 myCar = new CarL3();
-            myCar.fuelType = new FuelType(); //Per evitare l'errore in compilazione dobbiamo creare un oggetto FuelType e inizializzarlo, qui lo creiamo
-            myCar.fuelType.type = "Diesel";  //Qui accediamo al campo dell'oggetto fuelType (oggetto di classe FuelType) e ci scriviamo dentro
-            myCar.fuelType.ltperKmh = 1.4;   // Sopra abbiamo fatto OggettoMyCar.OggettoFuelType(trovato come campo in OggettoCar).CampoType
-            myCar.fuelType.costPerLiter = 0.01;
-            //Se non inizializzassi ltperKmh e costPerLiter questi sarebbero tutti 0 o null 
+            CarL3 myCar = new CarL3();  // Stessa cosa, se chiamassi new CarL3() avrei errore, mancano il parametro!
+            myCar.fuelType = new FuelType("Diesel", 0.01, 1.4); //Qui vediamo l'uso del costruttore, se chiamassi come prima new FuelType() avrei errore, in quanto il costruttore per mia definizione prende 3 parametri!
+//Volendo usare il costruttore  CarL3(FuelType f) faremmo
+//          CarL3 myCar = new CarL3(new FuelType("Diesel", 0.01, 1.4)); Qui viene eseguito prima il costruttore FuelType (poi ritorna il puntatore all'oggetto fueltype) e poi quello CarL3
+            FuelType diesel = new FuelType("Diesel", 0.01, 1.4);
+            CarL3 yourCar = new CarL3(diesel);
             myCar.refuel(2);
             myCar.accellerate(100);
             myCar.brake(50);
             myCar.accellerate(50);
             myCar.brake(100);
+            yourCar.refuel(50);
+            yourCar.accellerate(80);
+            yourCar.brake(50);
 
             System.out.println(myCar.fuel);
             System.out.println(myCar.speed);
+            System.out.println(yourCar.fuel);
+            System.out.println(yourCar.speed);
         }
 }
 
-//Volendo approfondire l'interazione fra oggetti : Supponendo di volere diversi tipi di carburante
-//Serve una classe a sè : FuelType
