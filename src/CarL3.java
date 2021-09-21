@@ -8,8 +8,12 @@ public class CarL3 {
         CarL3() {         //fatto altrimenti il costruttore nel main dava errore
         }
         //E' possibile avere più costruttori, basta che non si sovrascrivano fra loro (qui la discriminante è se hanno gli stessi parametri -> stessa FIRMA)
-    void refuel (double amount) {
-            fuel = fuel + amount;
+    void refuel (FuelTank tank) {
+            if (this.fuelType.equals(tank.type)) {
+                fuel = fuel + tank.amount;    //se invoco refuel come posso sapere se è stato fatto carburante o meno?
+                tank.amount = 0;              //svuoto i litri della tanica
+            }
+
         }
         void brake (double amount) {
             if (amount > speed)
