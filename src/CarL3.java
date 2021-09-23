@@ -16,9 +16,13 @@ public class CarL3 {
         }
         void brake (double amount) {
             if (amount > speed)
-                speed = 0;
+                this.fullBrake();  //Se non usassimo this qui fullBrake non avrebbe effetto
             else
                 speed = speed - amount;
+        }
+        //creo un metodo comodo per fermare completamente l'auto, usato in brake
+        void fullBrake() {
+            this.speed = 0;
         }
         void accellerate (double amount) {
             double fuelCons = amount* fuelType.ltperKmh; //notiamo che ora per accedere al campo dobbiamo
@@ -37,19 +41,16 @@ public class CarL3 {
 
         public static void main(String[] args) {
             CarL3 myCar = new CarL3();
-            myCar.fuelType = new FuelType("Diesel", 0.01, 1.4);
             FuelType diesel = new FuelType("Diesel", 0.01, 1.4);
-            CarL3 yourCar = new CarL3(diesel);
-            myCar.refuel(new FuelTank(5));
+            myCar.fuelType = diesel;
+            myCar.refuel(new FuelTank(diesel, 100));
             myCar.accellerate(100);
-            myCar.brake(50);
-            myCar.accellerate(50);
-            myCar.brake(100);
-
+            myCar.brake(90);
             System.out.println(myCar.fuel);
             System.out.println(myCar.speed);
-            System.out.println(yourCar.fuel);
-            System.out.println(yourCar.speed);
+            myCar.accellerate(50);
+            myCar.brake(100);
+            System.out.println(myCar.speed);
         }
 }
 
