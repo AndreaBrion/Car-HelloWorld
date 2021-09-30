@@ -1,3 +1,4 @@
+package autovehicles.fuel;
 public class FuelType {
     String type;
     final double ltperKmh;
@@ -8,7 +9,6 @@ public class FuelType {
         this.costPerLiter = c;
         this.ltperKmh = l;
     }
-
     FuelType(String t, double c) {
         this.ltperKmh = 0.0;
         type = t;
@@ -17,7 +17,6 @@ public class FuelType {
     boolean isCompatible (Car car) {
         return car.fuelType.type.equals(this.type);
     }
-
 }
 
 

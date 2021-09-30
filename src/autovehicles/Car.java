@@ -1,3 +1,6 @@
+package autovehicles;
+import autovehicles.fuel.*;
+
 public class Car {
         double speed = 0.0;
         double fuel = 0.0;
@@ -20,7 +23,6 @@ public class Car {
             else
                 speed = speed - amount;
         }
-
         void fullBrake() {
             this.speed = 0;
         }
@@ -36,7 +38,6 @@ public class Car {
                 fuel = 0;
             }
         }
-
 
         public static void main(String[] args) {
             Car myCar = new Car();

@@ -1,3 +1,5 @@
+package autovehicles.fuel;
+
 public class FuelTank {
     FuelType type;
     double amount;
