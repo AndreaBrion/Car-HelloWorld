@@ -1,53 +1,56 @@
 public class Car {
         double speed = 0.0;
         double fuel = 0.0;
-        double ltperKmh = 0.0;
-//      speed e fuel sono i campi dell'oggetto
-//      speed = speed + amount PUO' ESSERE FATTO  speed+=amount
-        void refuel (double amount) {
-            fuel = fuel + amount;
+        FuelType fuelType = null;
+        Car(FuelType f) {
+            fuelType = f;
+        }
+        Car() {
+        }
+        void refuel (FuelTank tank) {
+            if (tank.type.isCompatible(this)) {
+                fuel = fuel + tank.amount;
+                tank.amount = 0;
+            }
+
         }
         void brake (double amount) {
             if (amount > speed)
-                speed = 0;
+                this.fullBrake();
             else
                 speed = speed - amount;
         }
+
+        void fullBrake() {
+            this.speed = 0;
+        }
         void accellerate (double amount) {
-            double fuelCons = amount*ltperKmh;
+            double fuelCons = amount* fuelType.ltperKmh;
             if (fuelCons < fuel) {
                 speed = speed + amount;
-                fuel = fuel - amount*ltperKmh;
+                fuel = fuel - amount* fuelType.ltperKmh;
             }
             else {
-                double increaseSpeed = fuel / ltperKmh;
+               double increaseSpeed = fuel / fuelType.ltperKmh;
                 speed = speed + increaseSpeed;
                 fuel = 0;
             }
         }
+
+
         public static void main(String[] args) {
             Car myCar = new Car();
+            FuelType diesel = new FuelType("Diesel", 0.01, 1.4);
+            myCar.fuelType = diesel;
+            myCar.refuel(new FuelTank(diesel, 99999));
             myCar.accellerate(100);
-//          Se scrivessimo
-//          Car yourCar = new Car();
-//          eseguendo "yourCar.accelerate(172);"
-//          yourCar avrebbe una velocità di 172, infatti
-//          "Car myCar = new Car();" crea un oggetto
-//          Qui i due oggetti sono distinti e con velocità distinte.
-//
-//          Se invece scrivessimo
-//          "Car yourCar = myCar;"
-//          eseguendo "yourCar.accelerate(172);"
-//          allora qui avremmo due variabili locali che puntano
-//          allo stesso oggetto (o anche "sono lo stesso oggetto").
-//          myCar  è una variabile locale puntatore che PUNTA all'oggetto.
-//          Qui quando modificando la velocità di yourCar modifico la velocità di myCar.
-//          Se cambiamo lo STATO di myCar allora lo cambiamo anche in yourCar.
-            myCar.brake(50);
-            myCar.accellerate(50);
-            myCar.brake(100);
-
+            myCar.brake(90);
             System.out.println(myCar.fuel);
+            System.out.println(myCar.speed);
+            myCar.accellerate(50);
+            System.out.println(myCar.speed);
+            myCar.brake(100);
             System.out.println(myCar.speed);
         }
 }
+
