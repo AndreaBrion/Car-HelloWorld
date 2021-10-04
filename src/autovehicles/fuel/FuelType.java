@@ -32,6 +32,24 @@ public class FuelType {
     public double getCostPerLiter() {
         return this.costPerLiter;
     }
+    //normalmente i set non hanno tipo di ritorno, ma qui troviamo utile ritornare un boolenao
+    //in base alla positività o negatività di costPerLiter (passato in input)
+    public boolean setCostPerLiter(double costPerLiter) {
+        if (costPerLiter < 0){
+            this.costPerLiter = 0;
+        return false;
+        }
+        else {
+            double difference = Math.abs(this.costPerLiter - costPerLiter);
+            double differenxePercentage = difference / this.costPerLiter;
+            if (differenxePercentage < 0.2) {
+                this.costPerLiter = costPerLiter;
+                return true;
+            }
+            else
+                return false;
+        }
+    }
 }
 
 
