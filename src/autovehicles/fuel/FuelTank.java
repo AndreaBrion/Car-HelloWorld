@@ -1,9 +1,9 @@
 package autovehicles.fuel;
 
 public class FuelTank {
-    public FuelType type;
-    public double amount;
-    int id;
+    private FuelType type;
+    private double amount;
+    private int id;
     static int counter = 0;
     public FuelTank(FuelType type) {
         this.type = type;
@@ -25,5 +25,20 @@ public class FuelTank {
     }
     static void resetTanksCount() {
         FuelTank.counter = 0;
+    }
+    public FuelType getType() {
+        return this.type;
+    }
+    public double getAmount() {
+        return this.amount;
+    }
+    public int getId() {
+        return this.id;
+    }
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+    public void emptyTank() {
+        this.amount = 0;
     }
 }
