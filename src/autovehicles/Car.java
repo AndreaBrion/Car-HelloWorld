@@ -4,7 +4,7 @@ import autovehicles.fuel.*;
 public class Car {
         double speed = 0.0;
         double fuel = 0.0;
-        FuelType fuelType = null;
+        public FuelType fuelType = null;
         Car(FuelType f) {
             fuelType = f;
         }

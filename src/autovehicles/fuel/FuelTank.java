@@ -1,8 +1,8 @@
 package autovehicles.fuel;
 
 public class FuelTank {
-    FuelType type;
-    double amount;
+    public FuelType type;
+    public double amount;
     int id;
     static int counter = 0;
     public FuelTank(FuelType type) {

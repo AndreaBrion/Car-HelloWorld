@@ -1,10 +1,12 @@
 package autovehicles.fuel;
+import autovehicles.Car;
+
 public class FuelType {
     String type;
-    final double ltperKmh;
+    public final double ltperKmh;
     double costPerLiter;
     double FUEL_CONS;
-    FuelType(String t, double c, double l) {
+    public FuelType(String t, double c, double l) {
         this.type = t;
         this.costPerLiter = c;
         this.ltperKmh = l;
@@ -14,7 +16,7 @@ public class FuelType {
         type = t;
         costPerLiter = c;
     }
-    boolean isCompatible (Car car) {
+    public boolean isCompatible(Car car) {
         return car.fuelType.type.equals(this.type);
     }
 }
