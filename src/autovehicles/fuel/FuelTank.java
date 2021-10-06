@@ -1,5 +1,9 @@
 package autovehicles.fuel;
-
+/**
+ * This class represents a type of tank
+ * @author Andrea Brion 860595
+ * @since 1.0
+ */
 public class FuelTank {
     private FuelType type;
     private double amount;

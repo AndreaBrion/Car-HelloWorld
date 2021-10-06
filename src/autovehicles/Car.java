@@ -1,6 +1,11 @@
 package autovehicles;
 import autovehicles.fuel.*;
 
+/**
+ * This class represents a car
+ * @author Andrea Brion 860595
+ * @since 1.0
+ */
 public class Car {
        //I campi di Car sono  variabili che servono solo alla classe Car -> information hiding
        //abbiamo lascaito solo il fueltype visibile fuori dalla classe Car
@@ -21,13 +26,26 @@ public class Car {
             }
 
         }
-        public void brake (double amount) {
+
+    /**
+     * Questo metodo riduce la velocità di una quantità passata come parametro, non ritorna nulla
+     * @param amount Sta per la quantità di velocità ridotta
+     * @author Andrea Brion
+     * @since 1.0
+     */
+    public void brake (double amount) {
             if (amount > speed)
                 this.fullBrake();
             else
                 speed = speed - amount;
         }
-        public void fullBrake() {
+
+    /**
+     * Ferma la macchina, non prende parametri e non ha tipo di ritorno
+     * @author Andrea Brion
+     * @since 1.0
+     */
+    public void fullBrake() {
             this.speed = 0;
         }
         double computeConsumedFuel (double speedIncrease, double litresPerKmh) {
@@ -74,63 +92,19 @@ public class Car {
         }
 }
 
-
-//Visto i concetti di classi, oggetti vediamo :
-//Vediamo come strutturare il codice in modo da nascondere la nostra implementazione.
-//Incapsulamento e information hiding
-//
-//Una classe definisce un contratto, un contratto concettualmente quando prendi una classe e la istanzi puoi fare tot cose (lo sviluppatore "promette"
-//che l'utilizzatore potrà fare un tot azioni" -> come un contratto)
-//Parlando di contratti dobbiamo precisare però che stiamo astraendo (non stiamo andando a vedere COME è fatto il metodo X, a me interessa si possa vedere
-//la firma del metodo)
-//L'idea è di astrarre tutto ciò che è implementazione e ci focalizziamo sulle componenti importanti per l'utilizzo concettuale della classe (per istanziarla
-//e utilizzarla)
-//Importante : commentare le funzioni in modo che un'altra persona debba indagare il codice per capire cosa fa un metodo
-//L'incapsulamento
-//Quando creaimo/pensiamo-ad una classe dobbiamo creare un'entità logica coerente :
-//ES ho una macchina con n litri di benz, con una velocità e un tipo di carburante (ciascuno incrementa la velocità in modo diverso)
-//   La classe va strutturata in modo che i dati e le funzionalità coerenti con se stesse siano all'interno della classe
-//   Qui speed, fuel staranno in car. Il tipo di carburante starà in un'altra classe in quanto più macchine usano il carburante e concettualmente
-//   "quanto km/h incremento per litro di carburante appartiene all'unità concettuale di "Tipo di carburante" "
-//In questa idea i dati vengono messi insieme o impacchettati alle funzionalità che lavorano con questi dati.
-//L'obiettivo è sia che non vi sia codice duplicato, ma principalmente l'idea di incapsulamento significa "tutta l'unità è chiusa in sè stessa", quindi con un
-//buon incapsulamento modo riusciamo ad massimizzare l'informazione che nascondiamo
-//Quei campi non voglio che qualcuno possa modificarli -> voglio ad esempio che venga usato accelerate per accellerare e non che un utente possa cambiare la sua velocità
-//solo modificando il campo speed (così mantengo una coerenza logica con la mia implementazione -> in modo che la benzina venga ridotta)
-//Dobbiamo nascondere tutto ciò su cui noi vogliamo avere un controllo e tutto quello che non interessa all'utilizzatore -> così manteniamo una coerenza logica
-//Qual è lo scopo finale?
-//Lo scopo finale dell'incapsulamento è avere uno stato di ciascun oggetto coerente, inoltre l'uso dei package comporta un buon uso di incapsulamento
-//capsula può avere da una classe ad un package o più
-//Inizialmente il metodo accelerate aveva solo la sottrazione del carburante, in seguito
-//abbiamo fatto in modo che il carburante non potesse andare sotto 0 (quantità) in quanto non avrebbe molto senso
-//
-//Oggi vediamo i modificatori d'accesso
-//Nascondere l'informazione è importante perchè :
-//	-Così quando vedo una classe e vedo l'informazione esposta vedo solo ciò che lo sviluppatore considerò interessante
-//	-Limitare l'accesso a componenti della classe quindi oggetti che andiamo ad istanziare -> importante non solo per la consistenza logica, ma anche per
-//												  le dipendenze (Nell'evolversi il codice potrebbe aver necessità
-//												  che dei valori ad esempio velocità mantenga altre info ad esempio
-// 												  l'unità di misura usata (mp/s o km/h ecc) -> così riduciamo la dipendenza
-//											   	  fra i moduli e anche fra versioni successive di codice)
-//
-//La regola d'oro per questo è : Chi usa il mio codice (il client) deve avere accesso a tutto ciò di cui ha bisogno e non deve vedere accesso a nulla di cui non gli serva
-//
-//Private -> visto, scritto e acceduto solo dalla classe
-//Protected -> visto, scritto e acceduto classi,sottoclassi e package
-//Default -> come protected solo che non per le sottoclassi
-//Ma cosa significa quando definisco una variabile private o default?
-//Significa che ho viste diverse dell'istanza della classe in base a dove mi trovo.
-//Come decidiamo se uno o gli altri?
-//Public -> tutto quello che c'è nel contratto
-//Private -> tutto ciò che è privato (dettagli implementativi interni)
-//NB Se ho due classi con un campo con stesso nome ho un conflitto di nomi se invoco il campo? No per accedere al campo devo
-//   accedere all'oggetto!
-//   I campo NON sono variabili globali, in quanto sono sempre all'interno all'interno di un blocco classe, quindi dentro un oggetto!
-//
-//Il package è un unità coerente che contiene tutte le implementazioni che riguardano le macchine.
-//
-//L'uso dei get ha un grosso contro : Quando eseguo una chiamata ad un get, viene creto spazio nello stack per i parametri ecc... Questo ha un peso
-//computazionale diverso dall'accedere semplicemente un campo! -> svantaggio se ho un programma dove ho risorse computazionale limitata
-//Linguaggi ad oggetti poco indicato per soluzioni con risorse computazionali, sono invece ottimi per quando abbiamo tante risorse
-//computazionali e applicazioni che implementano una logica complessa, ma riusano tante librerie
-
+//Commenti : Devono essere strutturati ed esternamente visibili
+//  	   Una volta compilato il codice, i commenti non si vedono più -> visibili solo nel sorgente
+//	   // - /* */ -> Commenti interni, persi alla compilazione -> commenti che servono al creatore del codice o a chi ci lavorera, ma non servono all'utilizzatore della libreria
+//	   /** */ -> Commenti simili agli interni, usati prima della dichiarazione di una classe, di un campo pubblico, di un metodo pubblico
+//	   Javadoc -> costruiamo una documentazione apposita -> crea una pagina per classe
+//	   	      Vedi slides
+//	   	      Per costruire la pagina html dopo aver posto i commenti digitare da shell :
+//		      "cd C:\Users\Utente\Desktop\Esami Settembre\Esami gennaio\Java Mod I\EserciziInClasse\L1\src>
+//                       javadoc autovehicles.NomeClasse"
+//	   	      Otteniamo così un file html nella directory del file sorgente
+//		      Dall'idee però possiamo creare lo stesso file con più facilità (possiamo anche determinare che commenti rendere visibili o meno)
+//	 	      Il file creato andrà nel file html di nome "index"
+//	   	      Regole per commentare :
+//              Commentare le tutto ciò che è public
+//              Non commentare tutto ciòche è private
+//              Decidere se commentare ciò che è protected/default

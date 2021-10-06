@@ -1,6 +1,10 @@
 package autovehicles.fuel;
 import autovehicles.Car;
-
+/**
+ * This class represents a type of fuel
+ * @author Andrea Brion 860595
+ * @since 1.0
+ */
 public class FuelType {
     String type;
     private final double ltperKmh;
