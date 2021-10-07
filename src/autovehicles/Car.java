@@ -29,7 +29,9 @@ public class Car {
 
     /**
      * Questo metodo riduce la velocità di una quantità passata come parametro, non ritorna nulla
-     * @param amount Sta per la quantità di velocità ridotta
+     * @param amount Sta per la quantità di velocità ridotta. Deve essere maggiore o uguale a 0 per creare effetto
+     *               if and only if (amount >= 0)
+     * @requires amount >= 0
      * @author Andrea Brion
      * @since 1.0
      */
@@ -51,7 +53,17 @@ public class Car {
         double computeConsumedFuel (double speedIncrease, double litresPerKmh) {
             return speedIncrease*litresPerKmh;
         }
-        public void accellerate (double amount) {
+
+    /**
+     * Accelerate the car of the given amount of km/h
+     *
+     * @param amount of speed in km/h. If there is not enough fuel, it accelerates as much as possible
+     *
+     * @requires amount >= 0
+     * @ensures if (computeConsumedFuel(amount, fuelType.getLtperKmh());) < fuel -> speed = pre(speed) + amount
+     * @ensures if (computeConsumedFuel(amount, fuelType.getLtperKmh());) >= fuel -> speed = pre(speed) + fuel/fuelType.getLitresPerKmh()
+     */
+    public void accellerate (double amount) {
             double fuelCons = computeConsumedFuel(amount, fuelType.getLtperKmh());
             if (fuelCons < fuel) {
                 speed = speed + amount;
