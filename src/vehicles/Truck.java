@@ -11,32 +11,6 @@ public class Truck {
     public Truck (FuelType f){
         this.fuelType = f;
     }
-
-    void refuel (FuelTank amount) {
-        if (this.getFuelType().isCompatible(tank)) {
-            fuel = fuel + tank.getAmount();
-            tank.setAmount(0);
-            // oppure possiamo usare tank.emptyTank();
-        }
-    }
-
-    private FuelType getFuelType()  {
-        return fuelType;
-    }
-
-    /**
-     *
-     */
-    public void accellerate (double a){
-        if (a>0)
-            this.speed = a + this.speed;
-    }
-    /**
-     *
-     */
-    public void fullBreak() {
-        this.speed = 0;
-    }
     void chargeLoad (double l) {
         if (l > 0 )
             this.loadedCharge += l;
@@ -58,8 +32,5 @@ public class Truck {
     * Lo immagazzino all'interno dello stato della mia macchina come un campo in
     * modo da usarlo a piacere
     */
-    double computeConsumedFuel (double speedIncrease, double litresPerKmh) {
-        return speedIncrease*litresPerKmh;
-    }
 
 }
