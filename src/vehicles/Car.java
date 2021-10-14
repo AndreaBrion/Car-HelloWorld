@@ -1,15 +1,14 @@
-package autovehicles;
-import autovehicles.fuel.*;
+package vehicles;
+import vehicles.fuel.*;
 
 /**
  * This class represents a car
  * @author Andrea Brion 860595
  * @since 1.0
  */
-public class Car {
-       //I campi di Car sono  variabili che servono solo alla classe Car -> information hiding
-       //abbiamo lascaito solo il fueltype visibile fuori dalla classe Car
-       //I metodi di Car però servono -> information hiding non significa porre tutto private
+public class Car extends Vechicle {
+       // Facendo car estensione posso levare i metodi in car che sono già presenti in Vehicle
+       // Uso i metodi della classe dopo extends, basta vedere i suggerimenti facendo "myCar."
         private double speed = 0.0;
         private double fuel = 0.0;
         private FuelType fuelType = null;
@@ -26,54 +25,8 @@ public class Car {
             }
 
         }
-
-    /**
-     * Questo metodo riduce la velocità di una quantità passata come parametro, non ritorna nulla
-     * @param amount Sta per la quantità di velocità ridotta. Deve essere maggiore o uguale a 0 per creare effetto
-     *               if and only if (amount >= 0)
-     * @requires amount >= 0
-     * @author Andrea Brion
-     * @since 1.0
-     */
-    public void brake (double amount) {
-            if (amount > speed)
-                this.fullBrake();
-            else
-                speed = speed - amount;
-        }
-
-    /**
-     * Ferma la macchina, non prende parametri e non ha tipo di ritorno
-     * @author Andrea Brion
-     * @since 1.0
-     */
-    public void fullBrake() {
-            this.speed = 0;
-        }
         double computeConsumedFuel (double speedIncrease, double litresPerKmh) {
             return speedIncrease*litresPerKmh;
-        }
-
-    /**
-     * Accelerate the car of the given amount of km/h
-     *
-     * @param amount of speed in km/h. If there is not enough fuel, it accelerates as much as possible
-     *
-     * @requires amount >= 0
-     * @ensures if (computeConsumedFuel(amount, fuelType.getLtperKmh());) < fuel -> speed = pre(speed) + amount
-     * @ensures if (computeConsumedFuel(amount, fuelType.getLtperKmh());) >= fuel -> speed = pre(speed) + fuel/fuelType.getLitresPerKmh()
-     */
-    public void accellerate (double amount) {
-            double fuelCons = computeConsumedFuel(amount, fuelType.getLtperKmh());
-            if (fuelCons < fuel) {
-                speed = speed + amount;
-                fuel = fuel - amount* fuelType.getCostPerLiter();
-            }
-            else {
-               double increaseSpeed = fuel / fuelType.getCostPerLiter();
-                speed = speed + increaseSpeed;
-                fuel = 0;
-            }
         }
         public FuelType getFuelType() {
         return fuelType;
@@ -86,8 +39,10 @@ public class Car {
             if (this.speed >= 0)
                 this.speed = speed;
     }
-
-    public static void main(String[] args) {
+        public double getFuelCons () {
+        return this.fuelType.getCostPerLiter();
+    }
+        public static void main(String[] args) {
             Car myCar = new Car();
             FuelType diesel = new FuelType("Diesel", 0.01, 1.4);
             myCar.fuelType = diesel;

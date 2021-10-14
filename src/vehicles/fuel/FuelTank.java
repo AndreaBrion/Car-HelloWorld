@@ -1,4 +1,4 @@
-package autovehicles.fuel;
+package vehicles.fuel;
 /**
  * This class represents a type of tank
  * @author Andrea Brion 860595

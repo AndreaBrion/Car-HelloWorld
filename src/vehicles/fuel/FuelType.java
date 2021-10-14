@@ -1,5 +1,5 @@
-package autovehicles.fuel;
-import autovehicles.Car;
+package vehicles.fuel;
+
 /**
  * This class represents a type of fuel
  * @author Andrea Brion 860595
