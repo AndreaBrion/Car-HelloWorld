@@ -24,7 +24,7 @@ import vehicles.fuel.FuelType;
         myCar.brake(200);
         Bicycle B = new Bicycle();
         race(myCar, B); // anche se questo metodo non fa nulla comunque possiamo passare qualsiasi veicolo!
+        Truck T = new Truck(diesel);
+        //T avrà i metodi di car, i propri e quelli di vehicle
     }
-}
-    //Solo per vedere che dentro il metodo vediamo i metodi di vehicle con v1. e v2.
 }
