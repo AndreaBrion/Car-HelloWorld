@@ -22,9 +22,14 @@ import vehicles.fuel.FuelType;
         myCar.brake(30);
         yourCar.accellerate(50);
         myCar.brake(200);
-        Bicycle B = new Bicycle();
+        Bicycle B = new Bicycle(0, 1 ,1);
         race(myCar, B); // anche se questo metodo non fa nulla comunque possiamo passare qualsiasi veicolo!
         Truck T = new Truck(diesel);
-        //T avrà i metodi di car, i propri e quelli di vehicle
+        myCar.accellerate(9999999);
+        boolean result = myCar.isFuelEmpty();
+        result = yourCar.isFuelEmpty();
+        //T avrà i metodi di car, i propri e quelli di vehicle, come B avrà i metodi della superclasse (vehicle) più i propri (quelli di bicycle -> posti in grassetto nel menù a tendina)
+
+
     }
 }

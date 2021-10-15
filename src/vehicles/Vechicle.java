@@ -15,7 +15,12 @@ public class Vechicle {
         if (a>0)
             this.speed = a + this.speed;
     }
-
+    public double getSpeed() {
+        return speed;
+    }
+    public Vechicle(int initialSpeed) {
+        this.speed = initialSpeed;
+    }
     /**
      * Ferma il veicolo, non prende parametri e non ha tipo di ritorno
      * @author Andrea Brion

@@ -13,9 +13,16 @@ public class Car extends Vechicle {
         private double fuel = 0.0;
         private FuelType fuelType = null;
         Car(FuelType f) {
+            super(0);
             fuelType = f;
         }
-        Car() {
+        public boolean isFuelEmpty() {
+            if (fuel <= 0) {
+                super.fullBrake();
+                return true;
+            }
+            else
+                return false;
         }
         void refuel (FuelTank tank) {
             if (this.getFuelType().isCompatible(tank)) {

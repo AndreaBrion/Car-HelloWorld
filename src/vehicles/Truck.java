@@ -3,7 +3,7 @@ import vehicles.fuel.*;
 import vehicles.fuel.FuelTank;
 import vehicles.fuel.FuelType;
 
-public class Truck {
+public class Truck extends Car{
     private double speed;
     private double loadedCharge = 0.0;
     private double fuel = 0;
@@ -11,11 +11,11 @@ public class Truck {
     public Truck (FuelType f){
         this.fuelType = f;
     }
-    void chargeLoad (double l) {
+    public void chargeLoad (double l) {
         if (l > 0 )
             this.loadedCharge += l;
     }
-    double unload (double u) {
+    public double unload (double u) {
         if (u > 0) {
             double value = this.loadedCharge;
             this.loadedCharge = 0.0;
@@ -32,5 +32,11 @@ public class Truck {
     * Lo immagazzino all'interno dello stato della mia macchina come un campo in
     * modo da usarlo a piacere
     */
+    /*Per il solito discorso della parola super, qui con super. posso accedere a tutti i metodi sopra (quelli di
+    * car e quelli di vehicle!
+    * */
+    public boolean isFuelEmpty(){
+        return super.isFuelEmpty();
+    }
 
 }
