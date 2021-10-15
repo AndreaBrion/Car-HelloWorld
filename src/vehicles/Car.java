@@ -16,7 +16,12 @@ public class Car extends Vechicle {
             super(0);
             fuelType = f;
         }
-        public boolean isFuelEmpty() {
+
+    public Car() {
+            super(0);
+    }
+
+    public boolean isFuelEmpty() {
             if (fuel <= 0) {
                 super.fullBrake();
                 return true;

@@ -27,13 +27,13 @@ public class Bicycle extends Vechicle{
      */
     public void accellerate (double a){
         if (a>0)
-            this.getSpeed() = a + this.getSpeed();
+            this.setSpeed(a);
     }
 
     /**
      *
      */
     public void fullBreak() {
-        this.speed = 0;
+        this.setSpeed(0);
     }
 }
