@@ -1,7 +1,7 @@
 package vehicles;
 
 public abstract class Vechicle { //astratta visto il metodo accelerate
-    private double speed = 0;
+    protected double speed = 0;
     /**
      * Accelerate the vehicle of the given amount of km/h
      *

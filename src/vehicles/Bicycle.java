@@ -27,7 +27,9 @@ public class Bicycle extends Vechicle{
      */
     public void accellerate (double a){
         if (a>0)
-            this.setSpeed(a);
+            super.speed += a;
+        // potevamo usare anche this.setSpeed(a);
+        // Però super.speed è più corretta!
     }
     /**
      *

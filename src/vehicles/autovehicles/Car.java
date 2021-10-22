@@ -7,8 +7,10 @@ import vehicles.fuel.*;
  * @author Andrea Brion 860595
  * @since 1.0
  */
-public class Car extends Vechicle {
-       // Facendo car estensione posso levare i metodi in car che sono già presenti in Vehicle
+public class Car extends Vechicle { //Qui ho errore in quanto vehicles è astratta -> non posso istanziare un oggetto Car in quanto è una sottoclasse, posso :
+       //Porre astratta anche Car
+       //Implementare accellerate
+    // Facendo car estensione posso levare i metodi in car che sono già presenti in Vehicle
        // Uso i metodi della classe dopo extends, basta vedere i suggerimenti facendo "myCar."
         private double speed = 0.0;
         private double fuel = 0.0;
@@ -21,7 +23,17 @@ public class Car extends Vechicle {
         public Car() {
             super(0);
     }
-
+    public void accellerate(double a) {
+        double fuelConsumed = computeConsumedFuel(a, fuelType.getLtperKmh());
+        if (fuelConsumed < fuel) {
+            speed = 0;
+            fuel = fuel - fuelConsumed;
+        } else {
+            double increaseSpeed = fuel / fuelType.getCostPerLiter();
+            speed = speed + increaseSpeed;
+            fuel = 0;
+        }
+    }
         public boolean isFuelEmpty() {
             if (fuel <= 0) {
                 super.setSpeed(0); // Qui setSpeed è visibile SSE è un metodo protected o public (per
