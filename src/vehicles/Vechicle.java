@@ -23,7 +23,8 @@ public abstract class Vechicle { //astratta visto il metodo accelerate
     }
     public Vechicle(int initialSpeed) {
         this.speed = initialSpeed;
-    }
+    } // questo costruttore non viene invocato dalla classe vehicles
+      // ma vengono invocate dalle sottoclassi!
     /**
      * Ferma il veicolo, non prende parametri e non ha tipo di ritorno
      * @author Andrea Brion
