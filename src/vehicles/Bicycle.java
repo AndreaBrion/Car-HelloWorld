@@ -29,7 +29,6 @@ public class Bicycle extends Vechicle{
         if (a>0)
             this.setSpeed(a);
     }
-
     /**
      *
      */
