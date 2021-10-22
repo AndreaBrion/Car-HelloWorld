@@ -14,15 +14,15 @@ public class Car extends Vechicle {
         private double fuel = 0.0;
         private FuelType fuelType = null;
 
-    public Car(FuelType f) {
+        public Car(FuelType f) {
             super(0);
             fuelType = f;
     }
-    public Car() {
+        public Car() {
             super(0);
     }
 
-    public boolean isFuelEmpty() {
+        public boolean isFuelEmpty() {
             if (fuel <= 0) {
                 super.setSpeed(0); // Qui setSpeed è visibile SSE è un metodo protected o public (per
                                    // il ragionamento dei set private conviene porli in protected!
