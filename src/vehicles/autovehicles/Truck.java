@@ -18,7 +18,7 @@ public class Truck extends Car {
         // viene invocato sempre lo stesso metodo sul truck! cioè viene invocato il metodo
         // della classe dell'oggetto chiamante!
         //Occhio che se ponessi solo accellerate() java sceglierebbe il metodo col this!
-            super.speed = super.speed-a*loadedCharge/1000;
+            super.setSpeed(super.getSpeed()-a*loadedCharge/1000);
     }
     public void chargeLoad (double l) {
         if (l > 0 )

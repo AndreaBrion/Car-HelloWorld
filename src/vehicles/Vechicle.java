@@ -1,7 +1,7 @@
 package vehicles;
 
 public abstract class Vechicle { //astratta visto il metodo accelerate
-    protected double speed = 0;
+    private double speed = 0;
     /**
      * Accelerate the vehicle of the given amount of km/h
      *
@@ -11,9 +11,12 @@ public abstract class Vechicle { //astratta visto il metodo accelerate
      * @ensures if (computeConsumedFuel(amount, fuelType.getLtperKmh());) < fuel -> speed = pre(speed) + amount
      * @ensures if (computeConsumedFuel(amount, fuelType.getLtperKmh());) >= fuel -> speed = pre(speed) + fuel/fuelType.getLitresPerKmh()
      */
-    public abstract void accellerate(double a);
-    //Un metodo astratto è un metodo che una classe (veicolo) indica che esiste, prende un double e non ritorna nulla
-    //NON CONOSCIAMO L'IMPLEMENTAZIONE
+    public void accellerate (double a){
+        if (a>0)
+            this.speed += a;
+        // potevamo usare anche this.setSpeed(a);
+        // Però super.speed è più corretta!
+    }
     public double getSpeed() {
         return speed;
     }
@@ -25,6 +28,7 @@ public abstract class Vechicle { //astratta visto il metodo accelerate
         this.speed = initialSpeed;
     } // questo costruttore non viene invocato dalla classe vehicles
       // ma vengono invocate dalle sottoclassi!
+
     /**
      * Ferma il veicolo, non prende parametri e non ha tipo di ritorno
      * @author Andrea Brion

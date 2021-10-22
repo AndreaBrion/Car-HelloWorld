@@ -25,11 +25,12 @@ public class Car extends Vechicle { //Qui ho errore in quanto vehicles è astrat
         public void accellerate(double a) {
         double fuelConsumed = computeConsumedFuel(a, fuelType.getLtperKmh());
         if (fuelConsumed < fuel) {
-            speed = 0;
+            super.accellerate(a);
             fuel = fuel - fuelConsumed;
-        } else {
+        }
+        else {
             double increaseSpeed = fuel / fuelType.getCostPerLiter();
-            speed = speed + increaseSpeed;
+            super.accellerate(increaseSpeed);
             fuel = 0;
         }
     }
@@ -74,11 +75,11 @@ public class Car extends Vechicle { //Qui ho errore in quanto vehicles è astrat
             myCar.accellerate(100);
             myCar.brake(90);
             System.out.println(myCar.fuel);
-            System.out.println(myCar.speed);
+            System.out.println(myCar.getSpeed());
             myCar.accellerate(50);
-            System.out.println(myCar.speed);
+            System.out.println(myCar.getSpeed());
             myCar.brake(100);
-            System.out.println(myCar.speed);
+            System.out.println(myCar.getSpeed());
         }
 }
 
