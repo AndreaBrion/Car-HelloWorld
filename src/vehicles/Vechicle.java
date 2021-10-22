@@ -18,8 +18,9 @@ public class Vechicle {
     public double getSpeed() {
         return speed;
     }
-    public void setSpeed(double speed) {
-        this.speed = speed;
+    protected void setSpeed(double speed) {
+        if (speed >= 0)
+            this.speed = speed;
     }
     public Vechicle(int initialSpeed) {
         this.speed = initialSpeed;

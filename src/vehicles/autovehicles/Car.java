@@ -1,4 +1,5 @@
-package vehicles;
+package vehicles.autovehicles;
+import vehicles.Vechicle;
 import vehicles.fuel.*;
 
 /**
@@ -12,24 +13,27 @@ public class Car extends Vechicle {
         private double speed = 0.0;
         private double fuel = 0.0;
         private FuelType fuelType = null;
-        Car(FuelType f) {
+
+    public Car(FuelType f) {
             super(0);
             fuelType = f;
-        }
-
+    }
     public Car() {
             super(0);
     }
 
     public boolean isFuelEmpty() {
             if (fuel <= 0) {
-                super.fullBrake();
+                super.setSpeed(0); // Qui setSpeed è visibile SSE è un metodo protected o public (per
+                                   // il ragionamento dei set private conviene porli in protected!
+                //avremmo potuto fare anche
+                //super.fullBrake();
                 return true;
             }
             else
                 return false;
         }
-        void refuel (FuelTank tank) {
+        public void refuel (FuelTank tank) {
             if (this.getFuelType().isCompatible(tank)) {
                 fuel = fuel + tank.getAmount();
                 tank.setAmount(0);
@@ -46,11 +50,7 @@ public class Car extends Vechicle {
         //Porre set e get in una classe rende praticamente le variabili interessate public
         //Possiamo però porre dei controlli/regole nei set
         //ad esempio rendiamo impossibile porre una velocità negativa!
-        //I set modificano lo stato dell'oggetto!
-        public void setSpeed(double speed) {
-            if (this.speed >= 0)
-                this.speed = speed;
-    }
+        //I set modificano lo stato dell'oggetto
         public double getFuelCons () {
         return this.fuelType.getCostPerLiter();
     }

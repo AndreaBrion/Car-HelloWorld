@@ -1,4 +1,5 @@
 package vehicles;
+import vehicles.autovehicles.*;
 import vehicles.fuel.FuelTank;
 import vehicles.fuel.FuelType;
 
