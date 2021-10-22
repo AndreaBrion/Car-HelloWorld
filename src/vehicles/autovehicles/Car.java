@@ -12,7 +12,6 @@ public class Car extends Vechicle { //Qui ho errore in quanto vehicles è astrat
        //Implementare accellerate
     // Facendo car estensione posso levare i metodi in car che sono già presenti in Vehicle
        // Uso i metodi della classe dopo extends, basta vedere i suggerimenti facendo "myCar."
-        private double speed = 0.0;
         private double fuel = 0.0;
         private FuelType fuelType = null;
 
@@ -23,7 +22,7 @@ public class Car extends Vechicle { //Qui ho errore in quanto vehicles è astrat
         public Car() {
             super(0);
     }
-    public void accellerate(double a) {
+        public void accellerate(double a) {
         double fuelConsumed = computeConsumedFuel(a, fuelType.getLtperKmh());
         if (fuelConsumed < fuel) {
             speed = 0;

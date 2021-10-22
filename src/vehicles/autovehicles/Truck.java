@@ -10,6 +10,16 @@ public class Truck extends Car {
     public Truck (FuelType f){
         this.fuelType = f;
     }
+    public void accellerate(double a) {
+        // qui 1000 sono per dare una percentuale!
+        double fuelConsumed = computeConsumedFuel(a, fuelType.getLtperKmh());
+            super.accellerate(a*(1+loadedCharge/1000));
+        // Se usassimo this.accellerate() otterrei un loop di ricorsioni! in quanto
+        // viene invocato sempre lo stesso metodo sul truck! cioè viene invocato il metodo
+        // della classe dell'oggetto chiamante!
+        //Occhio che se ponessi solo accellerate() java sceglierebbe il metodo col this!
+            super.speed = super.speed-a*loadedCharge/1000;
+    }
     public void chargeLoad (double l) {
         if (l > 0 )
             this.loadedCharge += l;
