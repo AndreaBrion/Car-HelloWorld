@@ -2,9 +2,7 @@ package vehicles.autovehicles;
 import vehicles.autovehicles.Car;
 import vehicles.fuel.FuelType;
 
-    //ponendo la visibilità di truck default, race non pò più vederla
-    //se la ponessimo protected -> errore (vedi appunti)
-    class Truck extends Car {
+public class Truck extends Car {
     private double speed;
     private double loadedCharge = 0.0;
     private double fuel = 0;
