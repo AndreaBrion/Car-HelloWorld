@@ -16,7 +16,7 @@ public class Rectangle extends Quadrilateral{
     public double getW() {
         return super.getEdge1();
     }
-    public double getArea() {
+    public double getA() {
         return this.getH()*this.getW();
     }
 }

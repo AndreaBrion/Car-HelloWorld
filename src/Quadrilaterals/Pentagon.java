@@ -1,6 +1,6 @@
 package Quadrilaterals;
 
-public abstract class Pentagon {
+public abstract class Pentagon extends Polyhedron {
     private final double edge1, edge2, edge3, edge4, edge5;
     protected Pentagon(double edge1, double edge2, double edge3, double edge4, double edge5) {
         this.edge1 = edge1;
@@ -12,7 +12,5 @@ public abstract class Pentagon {
     public double getP() {
         return edge1+edge2+edge3+edge4+edge5;
     }
-    public abstract double getA() {
-
-    }
+    public abstract double getA();
 }
