@@ -42,5 +42,13 @@ import vehicles.fuel.FuelType;
         C.refuel(two_lt);
         T.refuel(two_lt);
         race(B,C, 100);
+
+        Vechicle v1 = C;
+        Vechicle v2 = T;
+        //Qui se facciamo
+        // v1.refuel(two_lt)
+        //Otteniamo errore
+        //In quanto il compilatore obbliga a chiamare solo metodi di vehicle
+        //Assegnando una sottoclasse/sottotipo ad un supertipo posso accedere SOLO all'interfaccia del supertipo!
     }
 }
