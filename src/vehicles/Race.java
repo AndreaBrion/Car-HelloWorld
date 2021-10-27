@@ -80,9 +80,14 @@ import vehicles.fuel.*;
         Truck yourRealT = (Truck) yourT;
         Car yourRealC = (Car) yourT;
         */
-        //Questo mi da errore sia nella condizione dell'if (sempre falso) sia nell'assegnamento (codice morto->mai eseguito)
+        //Questo mi da errore sia nella condizione dell'if (sempre falso) -> non c'è relazione di sottotipo
+        // sia nell'assegnamento (codice morto->mai eseguito)
         if (v1 instanceof Bicycle)
             B = (Bicycle) v1;
+        //Fare il casting di una superclasse in una sua superclasse è ridondante, in quanto la sottoclasse è sempre a
+        //disposizione, come segue
+        Car yourCar = new Car(Diesel);
+        Vechicle v3 = (Vechicle) yourCar;
 
 
     }
