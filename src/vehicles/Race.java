@@ -48,17 +48,9 @@ import vehicles.fuel.*;
         Car C = new Car (Diesel);
         Bicycle B = new Bicycle(10, 1 ,1);
         Truck T = new Truck(Diesel);
-
-        C.refuel(two_lt);
-        two_lt.setAmount(2);
-        T.refuel(two_lt);
         race(B,C, 100);
         Vechicle v1;
         Vechicle v2;
-        two_lt.setAmount(2);
-        C.refuel(two_lt);
-        two_lt.setAmount(2);
-        T.refuel(two_lt);
         if (Math.random() >= 0.5)
             v1 = C;
         else
@@ -69,6 +61,7 @@ import vehicles.fuel.*;
             v2 = T;
         race(v1,v2,10);
         //Non è detto che eseguendo il codice so che tipo dinamico ho
+        /**
         Vechicle yourCar = new Car(Diesel);
         Car yourRealCar = (Car) yourCar;
         //Così eseguo il casting, ho tipo statico Vehicle e dinamico (che sappiamo e quindi possiamo fare il casting) Car
@@ -86,6 +79,10 @@ import vehicles.fuel.*;
         Vechicle yourT = new Truck(Diesel);
         Truck yourRealT = (Truck) yourT;
         Car yourRealC = (Car) yourT;
+        */
+        //Questo mi da errore sia nella condizione dell'if (sempre falso) sia nell'assegnamento (codice morto->mai eseguito)
+        if (v1 instanceof Bicycle)
+            B = (Bicycle) v1;
 
 
     }
