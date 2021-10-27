@@ -1,7 +1,6 @@
 package vehicles;
 import vehicles.autovehicles.*;
-import vehicles.fuel.FuelTank;
-import vehicles.fuel.FuelType;
+import vehicles.fuel.*;
 
     public class Race {
 
@@ -40,11 +39,15 @@ import vehicles.fuel.FuelType;
         Bicycle B = new Bicycle(10, 1 ,1);
         Truck T = new Truck(Diesel);
         C.refuel(two_lt);
+        two_lt.setAmount(2);
         T.refuel(two_lt);
         race(B,C, 100);
-
         Vechicle v1;
         Vechicle v2;
+        two_lt.setAmount(2);
+        C.refuel(two_lt);
+        two_lt.setAmount(2);
+        T.refuel(two_lt);
         if (Math.random() >= 0.5)
             v1 = C;
         else
@@ -53,11 +56,28 @@ import vehicles.fuel.FuelType;
             v2 = C;
         else
             v2 = T;
-        race(v1,v2,100);
-        //Qui se facciamo
-        // v1.refuel(two_lt)
-        //Otteniamo errore
-        //In quanto il compilatore obbliga a chiamare solo metodi di vehicle
-        //Assegnando una sottoclasse/sottotipo ad un supertipo posso accedere SOLO all'interfaccia del supertipo!
+        C.refuel(two_lt);
+        T.refuel(two_lt);
+        race(v1,v2,10);
+        //Non è detto che eseguendo il codice so che tipo dinamico ho
+        Vechicle yourCar = new Car(Diesel);
+        Car yourRealCar = (Car) yourCar;
+        //Così eseguo il casting, ho tipo statico Vehicle e dinamico (che sappiamo e quindi possiamo fare il casting) Car
+        //Posso fare un Veicolo e fare il casting a Car
+        Vechicle myV = new Car(Diesel);
+        Car myRealV = (Car) myV;
+        //senza (Car) non potrei fare tale assegnamento!
+        //NON POSSIAMO PERO' FARE, in quanto non posso fare un casting di una macchina a furgone
+        //Un oggetto di tipo A non può essere castato ad B!
+        Vechicle yourV = new Car(Diesel);
+        Truck myRealT = (Truck) yourV;
+        //Car non piò essere castata a Truck, ma viceversa si
+        //Non è necessario fare casting del tipo pià basso, è possibile fare il castingdi qualsiasi livello intermedio
+        //che sia compatibile, infatti 
+        Vechicle yourT = new Truck(Diesel);
+        Truck yourRealT = (Truck) yourT;
+        Car yourRealC = (Car) yourT;
+
+
     }
 }

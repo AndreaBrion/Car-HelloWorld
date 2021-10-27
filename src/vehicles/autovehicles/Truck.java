@@ -5,7 +5,6 @@ import vehicles.fuel.FuelType;
 public class Truck extends Car {
     private double speed;
     private double loadedCharge = 0.0;
-    private double fuel = 0;
     public Truck (FuelType f){
         super(f);
     }
