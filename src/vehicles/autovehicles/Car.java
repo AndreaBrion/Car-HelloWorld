@@ -14,7 +14,6 @@ public class Car extends Vechicle { //Qui ho errore in quanto vehicles è astrat
        // Uso i metodi della classe dopo extends, basta vedere i suggerimenti facendo "myCar."
         private double fuel = 0.0;
         private FuelType fuelType = null;
-
         public Car(FuelType f) {
             super(0);
             fuelType = f;
@@ -46,7 +45,7 @@ public class Car extends Vechicle { //Qui ho errore in quanto vehicles è astrat
                 return false;
         }
         public void refuel (FuelTank tank) {
-            if (this.getFuelType().isCompatible(tank)) {
+            if (this.getFuelType().isCompatible(this.fuelType)) {
                 fuel = fuel + tank.getAmount();
                 tank.setAmount(0);
                 // oppure possiamo usare tank.emptyTank();
@@ -57,7 +56,7 @@ public class Car extends Vechicle { //Qui ho errore in quanto vehicles è astrat
             return speedIncrease*litresPerKmh;
         }
         public FuelType getFuelType() {
-        return fuelType;
+        return this.fuelType;
     }
         //Porre set e get in una classe rende praticamente le variabili interessate public
         //Possiamo però porre dei controlli/regole nei set

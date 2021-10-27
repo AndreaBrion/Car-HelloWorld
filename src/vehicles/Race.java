@@ -34,17 +34,26 @@ import vehicles.fuel.FuelType;
             return 2;
     }
     public static void main(String[] args) {
-        FuelType diesel = new FuelType("Diesel", 0.01, 1.4);
-        FuelTank two_lt = new FuelTank(diesel, 2);
-        Car C = new Car (new FuelType("diesel", 1.4, 0.01));
+        FuelType Diesel = new FuelType("Diesel", 0.01, 1.4);
+        FuelTank two_lt = new FuelTank(Diesel, 2);
+        Car C = new Car (Diesel);
         Bicycle B = new Bicycle(10, 1 ,1);
-        Truck T = new Truck(diesel);
+        Truck T = new Truck(Diesel);
         C.refuel(two_lt);
         T.refuel(two_lt);
         race(B,C, 100);
 
-        Vechicle v1 = C;
-        Vechicle v2 = T;
+        Vechicle v1;
+        Vechicle v2;
+        if (Math.random() >= 0.5)
+            v1 = C;
+        else
+            v1 = T;
+        if (Math.random() >= 0.5)
+            v2 = C;
+        else
+            v2 = T;
+        race(v1,v2,100);
         //Qui se facciamo
         // v1.refuel(two_lt)
         //Otteniamo errore

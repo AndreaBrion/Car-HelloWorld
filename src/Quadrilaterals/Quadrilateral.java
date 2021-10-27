@@ -25,8 +25,8 @@ public abstract class Quadrilateral extends Polyhedron {
         return edge4;
     }
 
-    public Polyhedron addEdge (double edge) {
-        return new Pentagon(this.getEdge1(), this.getEdge2(), this.getEdge3(), this.getEdge4() , edge);
+    //public Polyhedron addEdge (double edge) {
+    //    return new Pentagon(this.getEdge1(), this.getEdge2(), this.getEdge3(), this.getEdge4() , edge);
 
-    }
+   // }
 }

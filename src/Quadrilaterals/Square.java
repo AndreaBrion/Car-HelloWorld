@@ -14,7 +14,7 @@ public class Square extends Rectangle{ // quadrato E' un rettangolo! RELAZIONE D
         Square S = new Square(10);
         R.getPerim();
         S.getPerim();
-        R.getArea();
-        S.getArea();
+        R.getA();
+        S.getA();
     }
 }

@@ -19,4 +19,9 @@ public class Rectangle extends Quadrilateral{
     public double getA() {
         return this.getH()*this.getW();
     }
+
+    @Override
+    public Polyhedron addEdge(double edge) {
+        return null;
+    }
 }

@@ -20,7 +20,7 @@ public class FuelType {
         type = t;
         costPerLiter = c;
     }
-    public boolean isCompatible(FuelTank tank) {
+    public boolean isCompatible(FuelType tank) {
         //qui c'è un problema concettuale, in refule abbiamo la macchina che prende fuleType della tanica e passa se stessa al fuelType
         //fuelType ha bisogno di vedere un dettagli implementativo interno della Macchina
         //Se passassi un parametro Car ciò diventa ambiguo : è la macchina che chiede se la tanica è compatibile oppure è la macchina
