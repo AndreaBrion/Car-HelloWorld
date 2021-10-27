@@ -53,11 +53,25 @@ import vehicles.fuel.*;
         else
             v1 = T;
         if (Math.random() >= 0.5)
-            v2 = C;
+            v2 = B;
         else
             v2 = T;
-        C.refuel(two_lt);
-        T.refuel(two_lt);
+
+        if (v1 instanceof Car) { //ritorna vero se v1 è un istanza di Car o dei suoi sottotipi quindi anche Truck!
+            FuelTank three_lt = new FuelTank(Diesel, 3);
+            Car c1 = (Car) v1; //Questo funziona anche se Truck c1 = (Truck) v1
+            c1.refuel(three_lt); // c1 potrebbe essere stesso tipo o sottotipo del tipo di v1
+        }
+        if (v1 instanceof Truck) { //ritorna falso se v1 è Car!
+            FuelTank three_lt = new FuelTank(Diesel, 3);
+            Truck t1 = (Truck) v1;
+            t1.refuel(three_lt);
+        }
+        if (v2 instanceof Truck) {
+            FuelTank three_lt = new FuelTank(Diesel, 3);
+            Truck t2 = (Truck) v2;
+            t2.refuel(three_lt);
+        }
         race(v1,v2,10);
         //Non è detto che eseguendo il codice so che tipo dinamico ho
         Vechicle yourCar = new Car(Diesel);
@@ -73,7 +87,7 @@ import vehicles.fuel.*;
         Truck myRealT = (Truck) yourV;
         //Car non piò essere castata a Truck, ma viceversa si
         //Non è necessario fare casting del tipo pià basso, è possibile fare il castingdi qualsiasi livello intermedio
-        //che sia compatibile, infatti 
+        //che sia compatibile, infatti
         Vechicle yourT = new Truck(Diesel);
         Truck yourRealT = (Truck) yourT;
         Car yourRealC = (Car) yourT;
