@@ -1,4 +1,5 @@
 package vehicles;
+import vehicles.animals.Carretto;
 import vehicles.autovehicles.*;
 import vehicles.fuel.*;
 
@@ -15,6 +16,10 @@ import vehicles.fuel.*;
         v1.fullBrake();
         v2.fullBrake();
         double distanceV1 = 0, distanceV2 = 0;
+        if(v1 instanceof Loadable) //Senza interfaccia Loadable e implements, qui otterremmo degli errori -> non vede il tipo
+            ((Loadable) v1).unload();
+        if(v2 instanceof Loadable) //Senza interfaccia Loadable e implements, qui otterremmo degli errori -> non vede il tipo
+            ((Loadable) v2).unload();
         if (v1 instanceof Car) { //ritorna vero se v1 è un istanza di Car o dei suoi sottotipi quindi anche Truck!
             // Se pero poniamo v1 instanceof Truck e v1 è Car allora
             // ritorna falso se v1 è Car!
@@ -88,6 +93,11 @@ import vehicles.fuel.*;
         //disposizione, come segue
         Car yourCar = new Car(Diesel);
         Vechicle v3 = (Vechicle) yourCar;
+        Carretto myCarretto = new Carretto(0,0);
+        race(myCarretto, B, 100);         //Senza aver specificato nella gerarchia dei tipi quale
+                                                // classe implementa l'interfaccia loadable qui otterremo che nel metodo
+                                                // dove c'è il controllo if (v1 instanceof Loadable) v1 NON viene visto
+                                                //come Loadable -> Dobbiamo indicarlo! Lo indichiamo con implements!
 
 
     }

@@ -1,8 +1,9 @@
 package vehicles.autovehicles;
+import vehicles.Loadable;
 import vehicles.autovehicles.Car;
 import vehicles.fuel.FuelType;
 
-public class Truck extends Car {
+public class Truck extends Car implements Loadable {
     private double speed;
     private double loadedCharge = 0.0;
     public Truck (FuelType f){
@@ -22,13 +23,9 @@ public class Truck extends Car {
         if (l > 0 )
             this.loadedCharge += l;
     }
-    public double unload (double u) {
-        if (u > 0) {
-            double value = this.loadedCharge;
-            this.loadedCharge = 0.0;
-            return value;
-        }
-        return 0.0;
+    public double unload () {
+        this.loadedCharge = 0.0;
+        return 0;
     }
     public void setSpeed(double speed) {
         if (this.speed >= 0)
