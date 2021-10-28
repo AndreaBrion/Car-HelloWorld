@@ -15,14 +15,20 @@ public class Carretto extends Vechicle implements Loadable {
     public Carretto(){
         super(0);
     }
+
+    /** Non ci servono visto che li abbiamo implementati su Loadable
     public double unload () {
             this.loadedCharge = 0.0;
             return 0;
     }
-    public void chargeLoad (double l) {
+    */
+    /**
+     *
+     *
+     public void chargeLoad (double l) {
         if (l > 0 )
             this.loadedCharge += l;
     }
-
+    */
 
 }

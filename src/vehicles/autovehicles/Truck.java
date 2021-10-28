@@ -19,14 +19,16 @@ public class Truck extends Car implements Loadable {
         //Occhio che se ponessi solo accellerate() java sceglierebbe il metodo col this!
             super.setSpeed(super.getSpeed()-a*loadedCharge/1000);
     }
-    public void chargeLoad (double l) {
+    /**public void chargeLoad (double l) {
         if (l > 0 )
             this.loadedCharge += l;
     }
-    public double unload () {
+     */
+   /** public double unload () {
         this.loadedCharge = 0.0;
         return 0;
     }
+    */
     public void setSpeed(double speed) {
         if (this.speed >= 0)
             this.speed = speed;
