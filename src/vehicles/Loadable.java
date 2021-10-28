@@ -29,4 +29,5 @@ public interface Loadable {
         this.setLoad(0);
         return value;
     }
+    //IMPORTANTE : Se definisco un metodo qui dentro DEVE essere pubblico!
 }
