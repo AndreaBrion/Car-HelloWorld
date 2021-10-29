@@ -22,12 +22,16 @@ public interface Loadable {
     //Oppure usiamo i setter e getter
     default public void chargeLoad (double amount) {
         if (amount > 0)
-            this.setLoad(this.getLoad()) + amount);
+            this.setLoad(this.getLoad() + amount);
     }
     default public double unload () {
         double value = this.getLoad();
         this.setLoad(0);
         return value;
     }
+    void setLoad(double amount);
+    double getLoad();
+
+
     //IMPORTANTE : Se definisco un metodo qui dentro DEVE essere pubblico!
 }

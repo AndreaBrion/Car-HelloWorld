@@ -1,6 +1,11 @@
 package vehicles;
 
-public class Bicycle extends Vechicle{
+import java.awt.*;
+import java.awt.print.PageFormat;
+import java.awt.print.Printable;
+import java.awt.print.PrinterException;
+
+public class Bicycle extends Vechicle implements Printable {
     private final double frontTire, rearTire;
     public double frontTirePressure () {
         return this.frontTire;
@@ -30,5 +35,8 @@ public class Bicycle extends Vechicle{
      */
     public void fullBreak() {
         this.setSpeed(0);
+    }
+    public void print() {
+        System.out.println("I'm a byke with pressions :" +frontTire+" at front tire and " +rearTire+" at the rear tire");
     }
 }

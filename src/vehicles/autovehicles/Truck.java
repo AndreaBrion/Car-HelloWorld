@@ -3,7 +3,9 @@ import vehicles.Loadable;
 import vehicles.autovehicles.Car;
 import vehicles.fuel.FuelType;
 
-public class Truck extends Car implements Loadable {
+import java.awt.print.Printable;
+
+public class Truck extends Car implements Loadable, Printable {
     private double speed;
     private double loadedCharge = 0.0;
     public Truck (FuelType f){
@@ -19,11 +21,11 @@ public class Truck extends Car implements Loadable {
         //Occhio che se ponessi solo accellerate() java sceglierebbe il metodo col this!
             super.setSpeed(super.getSpeed()-a*loadedCharge/1000);
     }
-    /**public void chargeLoad (double l) {
+    public void chargeLoad (double l) {
         if (l > 0 )
             this.loadedCharge += l;
     }
-     */
+
    /** public double unload () {
         this.loadedCharge = 0.0;
         return 0;
@@ -44,5 +46,16 @@ public class Truck extends Car implements Loadable {
     public boolean isFuelEmpty(){
         return super.isFuelEmpty();
     }
+    public void print() {
+        System.out.println("I'm a truck transporting" +loadedCharge+" kg");
+    }
 
+    public void setLoad(double amount) {
+        this.loadedCharge = amount;
+    }
+    public double getLoad() {
+        double val = this.loadedCharge;
+        this.loadedCharge = 0;
+        return val;
+    }
 }
