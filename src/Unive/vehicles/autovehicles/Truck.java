@@ -1,10 +1,11 @@
 package Unive.vehicles.autovehicles;
+import Unive.vehicles.LoadableUnloadable;
 import Unive.vehicles.fuel.FuelType;
 import Unive.vehicles.autovehicles.Car;
 import Unive.vehicles.Loadable;
 import Unive.vehicles.Printable;
 
-public class Truck extends Car implements Loadable, Printable {
+public class Truck extends Car implements Loadable, Printable, LoadableUnloadable {
     private double speed;
     private double loadedCharge = 0.0;
     public Truck (FuelType f){

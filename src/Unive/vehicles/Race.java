@@ -17,9 +17,9 @@ import Unive.vehicles.fuel.*;
         v2.fullBrake();
         double distanceV1 = 0, distanceV2 = 0;
         if(v1 instanceof Loadable) //Senza interfaccia Loadable e implements, qui otterremmo degli errori -> non vede il tipo
-            ((Loadable) v1).unload();
+            ((LoadableUnloadable) v1).unload();
         if(v2 instanceof Loadable) //Senza interfaccia Loadable e implements, qui otterremmo degli errori -> non vede il tipo
-            ((Loadable) v2).unload();
+            ((LoadableUnloadable) v2).unload();
         if (v1 instanceof Printable) { //vediamo che qui stampa sse è Truck o Bicycle!
             ((Printable) v1).print();
         }
