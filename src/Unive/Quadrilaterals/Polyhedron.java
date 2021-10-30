@@ -1,4 +1,4 @@
-package Quadrilaterals;
+package Unive.Quadrilaterals;
 
 public abstract class Polyhedron {
     private double[] edges;

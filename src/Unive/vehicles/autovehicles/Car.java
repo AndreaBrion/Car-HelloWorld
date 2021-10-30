@@ -1,13 +1,13 @@
-package vehicles.autovehicles;
-import vehicles.Vechicle;
-import vehicles.fuel.*;
+package Unive.vehicles.autovehicles;
+import Unive.vehicles.Vechicle;
+import Unive.vehicles.fuel.*;
 
 /**
  * This class represents a car
  * @author Andrea Brion 860595
  * @since 1.0
  */
-public class Car extends Vechicle { //Qui ho errore in quanto vehicles è astratta -> non posso istanziare un oggetto Car in quanto è una sottoclasse, posso :
+public class Car extends Vechicle { //Qui ho errore in quanto Unive.vehicles è astratta -> non posso istanziare un oggetto Car in quanto è una sottoclasse, posso :
        //Porre astratta anche Car
        //Implementare accellerate
     // Facendo car estensione posso levare i metodi in car che sono già presenti in Vehicle

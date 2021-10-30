@@ -1,7 +1,7 @@
-package vehicles.animals;
+package Unive.vehicles.animals;
 
-import vehicles.Loadable;
-import vehicles.Vechicle;
+import Unive.vehicles.Loadable;
+import Unive.vehicles.Vechicle;
 
 public class Carretto extends Vechicle implements Loadable {
     private double loadedCharge;

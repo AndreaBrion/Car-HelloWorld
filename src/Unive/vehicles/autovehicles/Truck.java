@@ -1,9 +1,8 @@
-package vehicles.autovehicles;
-import vehicles.Loadable;
-import vehicles.autovehicles.Car;
-import vehicles.fuel.FuelType;
-
-import java.awt.print.Printable;
+package Unive.vehicles.autovehicles;
+import Unive.vehicles.fuel.FuelType;
+import Unive.vehicles.autovehicles.Car;
+import Unive.vehicles.Loadable;
+import Unive.vehicles.Printable;
 
 public class Truck extends Car implements Loadable, Printable {
     private double speed;
@@ -25,8 +24,20 @@ public class Truck extends Car implements Loadable, Printable {
         if (l > 0 )
             this.loadedCharge += l;
     }
-
-   /** public double unload () {
+    public double unload() {
+        double value = this.loadedCharge;
+        this.loadedCharge = 0;
+        return value;
+    }
+    public void setLoad(double amount) {
+        this.loadedCharge = amount;
+    }
+    public double getLoad() {
+        double val = this.loadedCharge;
+        this.loadedCharge = 0;
+        return val;
+    }
+    /** public double unload () {
         this.loadedCharge = 0.0;
         return 0;
     }
@@ -48,14 +59,5 @@ public class Truck extends Car implements Loadable, Printable {
     }
     public void print() {
         System.out.println("I'm a truck transporting" +loadedCharge+" kg");
-    }
-
-    public void setLoad(double amount) {
-        this.loadedCharge = amount;
-    }
-    public double getLoad() {
-        double val = this.loadedCharge;
-        this.loadedCharge = 0;
-        return val;
     }
 }

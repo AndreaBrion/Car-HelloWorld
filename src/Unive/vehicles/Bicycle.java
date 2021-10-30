@@ -1,9 +1,6 @@
-package vehicles;
+package Unive.vehicles;
 
-import java.awt.*;
-import java.awt.print.PageFormat;
-import java.awt.print.Printable;
-import java.awt.print.PrinterException;
+import Unive.vehicles.Printable;
 
 public class Bicycle extends Vechicle implements Printable {
     private final double frontTire, rearTire;

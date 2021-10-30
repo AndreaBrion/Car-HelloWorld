@@ -1,4 +1,4 @@
-package vehicles;
+package Unive.vehicles;
 
 public abstract class Vechicle { //astratta visto il metodo accelerate
     private double speed = 0;
@@ -26,7 +26,7 @@ public abstract class Vechicle { //astratta visto il metodo accelerate
     }
     public Vechicle(int initialSpeed) {
         this.speed = initialSpeed;
-    } // questo costruttore non viene invocato dalla classe vehicles
+    } // questo costruttore non viene invocato dalla classe Unive.vehicles
       // ma vengono invocate dalle sottoclassi!
 
     /**

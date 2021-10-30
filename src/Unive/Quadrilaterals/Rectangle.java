@@ -1,4 +1,4 @@
-package Quadrilaterals;
+package Unive.Quadrilaterals;
 
 /**
  * Classe che rappresenta un rettangolo

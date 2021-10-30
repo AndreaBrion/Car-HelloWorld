@@ -1,4 +1,4 @@
-package Quadrilaterals;
+package Unive.Quadrilaterals;
 
 public class Square extends Rectangle{ // quadrato E' un rettangolo! RELAZIONE DI ESSERE!
     private int edge;

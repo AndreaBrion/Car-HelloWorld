@@ -1,4 +1,4 @@
-package Quadrilaterals;
+package Unive.Quadrilaterals;
 
 public abstract class Pentagon extends Polyhedron {
     private final double edge1, edge2, edge3, edge4, edge5;

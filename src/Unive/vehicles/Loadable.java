@@ -1,4 +1,4 @@
-package vehicles;
+package Unive.vehicles;
 
 public interface Loadable {
     double loadedCharge = 0;

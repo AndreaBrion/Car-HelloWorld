@@ -1,3 +1,5 @@
+package Unive;
+
 public class HelloWorld {
     public static void main (String[] args) {
         System.out.println("Hello ");
@@ -11,7 +13,7 @@ public class HelloWorld {
 }
 
 //NB IMPORTANTE
-//Se portiamo il metodo main FUORI dalla classe HelloWorld, il metodo NON FUNZIONA
+//Se portiamo il metodo main FUORI dalla classe Unive.HelloWorld, il metodo NON FUNZIONA
 //In Java tutti i metodi stanno DENTRO la classe di appartenenza!
 
 //Se dovessimo eseguire da linea di comando :
@@ -21,7 +23,7 @@ public class HelloWorld {
 //javac Helloworld.java
 //Otteniamo così il file Helloworld.class
 //Per eseguirlo (qui dobbiamo dare in input una parola visto "+args[0]"
-//java HelloWorld pietro
+//java Unive.HelloWorld pietro
 //NB Quando indichiamo così l'esecuzione java esegue varie classi interne alla cartella, in futur vederemo come indicare cosa eseguire
 
 // NB Scrivendo "java" nel terminale otteniamo delle istruzioni, ad esempio

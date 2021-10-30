@@ -1,4 +1,4 @@
-package Quadrilaterals;
+package Unive.Quadrilaterals;
 
 public abstract class Quadrilateral extends Polyhedron {
     private final int edge1, edge2, edge3, edge4;
