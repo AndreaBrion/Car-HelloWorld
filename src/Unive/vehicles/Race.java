@@ -13,6 +13,7 @@ import Unive.vehicles.fuel.*;
     public static int race (Vechicle v1, Vechicle v2, double length) {
         //qui viene invocato la versione di accellerate corretta sulla base della
         //classe di v1 e v2, se v1 è una bici viene usato accellerate di Bicycle!
+        System.out.println("Race between vehicles");
         v1.fullBrake();
         v2.fullBrake();
         double distanceV1 = 0, distanceV2 = 0;
@@ -53,59 +54,27 @@ import Unive.vehicles.fuel.*;
         else
             return 2;
     }
+    public static int race (Car v1, Car v2, double length) {
+        System.out.println("Race between cars");
+        return -1;
+    }
+    public static int race (Car v1, Vechicle v2, double length) {
+        System.out.println("Race between a car and a vehicles");
+        return -1;
+    }
     public static void main(String[] args) {
         FuelType Diesel = new FuelType("Diesel", 0.01, 1.4);
         FuelTank two_lt = new FuelTank(Diesel, 2);
         Car C = new Car (Diesel);
         Bicycle B = new Bicycle(10, 1 ,1);
         Truck T = new Truck(Diesel);
-        race(B,C, 100);
-        Vechicle v1;
-        Vechicle v2;
-        if (Math.random() >= 0.5)
-            v1 = C;
-        else
-            v1 = T;
-        if (Math.random() >= 0.5)
-            v2 = B;
-        else
-            v2 = T;
-        race(v1,v2,10);
-        //Non è detto che eseguendo il codice so che tipo dinamico ho
-        /**
-        Vechicle yourCar = new Car(Diesel);
-        Car yourRealCar = (Car) yourCar;
-        //Così eseguo il casting, ho tipo statico Vehicle e dinamico (che sappiamo e quindi possiamo fare il casting) Car
-        //Posso fare un Veicolo e fare il casting a Car
-        Vechicle myV = new Car(Diesel);
-        Car myRealV = (Car) myV;
-        //senza (Car) non potrei fare tale assegnamento!
-        //NON POSSIAMO PERO' FARE, in quanto non posso fare un casting di una macchina a furgone
-        //Un oggetto di tipo A non può essere castato ad B!
-        Vechicle yourV = new Car(Diesel);
-        Truck myRealT = (Truck) yourV;
-        //Car non piò essere castata a Truck, ma viceversa si
-        //Non è necessario fare casting del tipo pià basso, è possibile fare il castingdi qualsiasi livello intermedio
-        //che sia compatibile, infatti
-        Vechicle yourT = new Truck(Diesel);
-        Truck yourRealT = (Truck) yourT;
-        Car yourRealC = (Car) yourT;
-        */
-        //Questo mi da errore sia nella condizione dell'if (sempre falso) -> non c'è relazione di sottotipo
-        // sia nell'assegnamento (codice morto->mai eseguito)
-        if (v1 instanceof Bicycle)
-            B = (Bicycle) v1;
-        //Fare il casting di una superclasse in una sua superclasse è ridondante, in quanto la sottoclasse è sempre a
-        //disposizione, come segue
-        Car yourCar = new Car(Diesel);
-        Vechicle v3 = (Vechicle) yourCar;
-        Carretto myCarretto = new Carretto(0,0);
-        race(myCarretto, B, 100);         //Senza aver specificato nella gerarchia dei tipi quale
-                                                // classe implementa l'interfaccia loadable qui otterremo che nel metodo
-                                                // dove c'è il controllo if (v1 instanceof Loadable) v1 NON viene visto
-                                                //come Loadable -> Dobbiamo indicarlo! Lo indichiamo con implements!
-
-
+        Car myCar = new Car(Diesel);
+        Car youCar = new Car(Diesel);
+        Vechicle v1 = myCar;
+        Vechicle v2 = youCar;
+        race(v1,v2, 100); //qui i tipi dinamici di v1 e v2 è Car, però per scelta di java (guarda
+                                //i tipi statici) usa il metodo race dove i parametri soon (Vechicle v1, Vechicle v1, ...)
+        
     }
 
 
