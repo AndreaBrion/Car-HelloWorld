@@ -20,6 +20,12 @@ import Unive.vehicles.fuel.*;
             ((Loadable) v1).unload();
         if(v2 instanceof Loadable) //Senza interfaccia Loadable e implements, qui otterremmo degli errori -> non vede il tipo
             ((Loadable) v2).unload();
+        if (v1 instanceof Printable) { //vediamo che qui stampa sse è Truck o Bicycle!
+            ((Printable) v1).print();
+        }
+        if (v2 instanceof Printable) { //vediamo che qui stampa sse è Truck o Bicycle!
+            ((Printable) v2).print();
+        }
         if (v1 instanceof Car) { //ritorna vero se v1 è un istanza di Car o dei suoi sottotipi quindi anche Truck!
             // Se pero poniamo v1 instanceof Truck e v1 è Car allora
             // ritorna falso se v1 è Car!
