@@ -74,7 +74,7 @@ import Unive.vehicles.fuel.*;
         Vechicle v2 = youCar;
         race(v1,v2, 100); //qui i tipi dinamici di v1 e v2 è Car, però per scelta di java (guarda
                                 //i tipi statici) usa il metodo race dove i parametri soon (Vechicle v1, Vechicle v1, ...)
-        
+
     }
 
 
