@@ -6,9 +6,14 @@ import Unive.vehicles.fuel.*;
     Vedi hashMap su javadoc (google) 
      */
 public class FuelTypeCache {
-    HashMap<String, FuelType> map = new HashMap<String, FuelType>();
-    FuelType getFuelTypeFromName(String n) {
+    private HashMap<String, FuelType> map = new HashMap<String, FuelType>();
+    public FuelType getFuelTypeFromName(String n) {
         return map.get(n);
+    }
+    public FuelType put(String n, double costPerLiter, double kmhPerLiter) {
+        FuelType value = new FuelType(n, costPerLiter, kmhPerLiter);
+        map.put(n, value);
+        return value;
     }
     // qui i generics sono <String, Fueltype>, la funzione andava anche senza indicarli
     // così però non sappiamo su cosa possiamo cercare e quali sono le chiavi e valori

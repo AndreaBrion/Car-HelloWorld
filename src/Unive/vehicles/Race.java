@@ -63,29 +63,15 @@ import Unive.vehicles.fuel.*;
         return -1;
     }
     public static void main(String[] args) {
-        FuelType Diesel = new FuelType("Diesel", 0.01, 1.4);
+        FuelTypeCache cache = new FuelTypeCache();
+        FuelType Petrol = new FuelType("Petrol", 1.4, 0.01);
+        FuelType Diesel = new FuelType("Diesel", 1.3, 0.015);
         FuelTank two_lt = new FuelTank(Diesel, 2);
-        Car C = new Car (Diesel);
+        Car C = new Car (0, cache.getFuelTypeFromName("Diesel"));
+        Car Y = new Car (0, cache.getFuelTypeFromName("Petrol"));
         Bicycle B = new Bicycle(10, 1 ,1);
         Truck T = new Truck(Diesel);
-        Car myCar = new Car(Diesel);
-        Car youCar = new Car(Diesel);
-        Vechicle v1 = myCar;
-        Vechicle v2 = youCar;
-        race(v1,v2, 100); //qui i tipi dinamici di v1 e v2 è Car, però per scelta di java (guarda
-                                //i tipi statici) usa il metodo race dove i parametri soon (Vechicle v1, Vechicle v1, ...)
-        Race raceObj = new Race();
-        ExtendedRace extRaceObj = new ExtendedRace();
-        Race fakeRaceObj = extRaceObj;
-       //Così posso eseguire usando l'istanza al posto di chiamare solo il metodo race()
-       raceObj.race(v1, v2, 100);
-       //Questo esegue la versione non estesa
-        extRaceObj.race(v1, v2, 100);
-       //Qui pure no prob, esegue la versione estesa che poi invoca Race
-        fakeRaceObj.race(v1, v2, 100);
-        //Qui abbiamo problemi, sui metodi statici Java esegue dispatching statico!
-        //IL COMPILATORE SI COMPORTA IN MODO DIVERSO!
-        //Non fa più dispatching dinamico, bensì statico!
+
 
     }
 

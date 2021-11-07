@@ -21,6 +21,10 @@ public class Car extends Vechicle { //Qui ho errore in quanto Unive.vehicles è 
         public Car() {
             super(0);
     }
+        public Car(int speed, FuelType f) {
+        super(speed);
+        fuelType = f;
+    }
         public void accellerate(double a) {
         double fuelConsumed = computeConsumedFuel(a, fuelType.getLtperKmh());
         if (fuelConsumed < fuel) {
