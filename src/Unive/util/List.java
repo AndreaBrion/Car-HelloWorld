@@ -25,6 +25,15 @@ public class List<V> {
     public V get(int i) { //Qui so già che ritornerà un qualcosa di tipo V
         return elements[i];
     }
+    public static <T> List <T> toList(T value) { //il tipo T esiste solo nel metodo toList() non appartiene alla classe
+    //definito così possiamo usarlo anche all'interno del metodo e non solo nella firma
+        List<T> result = new List<T>(); //creo una variabile result : Lista di tipo <T>
+        result.add(value);
+        return result;
+    }
+    public static <T> T getFirst(List<T> list) {
+        return list.get(0);
+    }
     public static void main(String[] args) {
        /* List<Vechicle> listV = new List<Vechicle>();
         List<Bicycle> listB = new List<Bicycle>();
@@ -71,6 +80,16 @@ public class List<V> {
         il dinamico di Bicycle
         L'errore sta nel voler porre un elemento Car in un array di Bicycle!
           * */
+
+          //dato il metodo toList() se voglio costruire una lista di macchine
+        // con la macchina costruita in precedenza :
+          List<Car> c = List.<Car>toList(new Car(0,new FuelType("Petrol", 1.4, 0.01)));
+          //Notiamo come invochiamo toList : Lista.<Tipo>METODO()
+         //Così facendo la firma del metodo è da interpretare :
+        //List<Car> toList(Car value)
+        //Tutto ciò funzionava anche se al posto di Car usavamo Truck
+        //Non possiamo però mischiare i tipi! Es :
+  // List<Car> c = List.<Truck>toList(new Car(0,new FuelType("Petrol", 1.4, 0.01))); -> ERRORE
     }
 
 }
