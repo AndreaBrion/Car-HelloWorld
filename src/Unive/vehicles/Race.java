@@ -1,15 +1,14 @@
 package Unive.vehicles;
-import Unive.vehicles.animals.Carretto;
 import Unive.vehicles.autovehicles.*;
 import Unive.vehicles.fuel.*;
 
     public class Race {
-    /**
-     * @param v1 first vehicle
-     * @param v2 second vehicle
-     * @param length
-     * @return the id of the winner or "-1" if there is a draw
-     */
+        /**
+         * @param v1 first vehicle
+         * @param v2 second vehicle
+         * @param length
+         * @return the id of the winner or "-1" if there is a draw
+         */
     public static int race (Vechicle v1, Vechicle v2, double length) {
         //qui viene invocato la versione di accellerate corretta sulla base della
         //classe di v1 e v2, se v1 è una bici viene usato accellerate di Bicycle!
@@ -72,6 +71,23 @@ import Unive.vehicles.fuel.*;
         Bicycle B = new Bicycle(10, 1 ,1);
         Truck T = new Truck(Diesel);
 
+       /*
+        Car winner = Race.new_race(C, Y, 700);  so che questo ritorna una Vechicle
+        Però otteniamo errore in quanto avrei bisogno di un tipo di ritorno Car
+        dato ciò cambiamo la firma del metodo, da :
+        public static Vechicle new_race(Vechicle v1, Vechicle v2, double length)
+        a :
+        public static <T> T new_race(T v1, T v2, double length)
+        Ovviamente cambiando il relativo corpo del metodo
+        Questo funziona, però T potrebbe essere QUALSIASI COSA -> NON L'HO VINCOLATO AD ESSERE
+        VECHICLE
+        Possiamo però porre dei limiti ai tipi passati come Generics, e lo otteniamo con :
+        public static <T extends Vechicle> T new_race(T v1, T v2, double length)
+        Così indico che T deve essere un Vechicle o un suo sottotipo, infatti ora gli
+        oggetti vedono i metodi getSpeed e fullBrake. Cosa che prima dava errore!
+        Ora non otteniamo più errore con :
+        Car winner = Race.new_race(C, Y, 700);
+        */
 
     }
 

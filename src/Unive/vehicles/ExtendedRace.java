@@ -1,6 +1,10 @@
 package Unive.vehicles;
 
 public class ExtendedRace extends Race {
+    public ExtendedRace() {
+        super(v1, v2);
+    }
+
     public static int race(Vechicle v1, Vechicle v2, double lenght){
         System.out.println("Racing in the esxtended version");
         return Race.race(v1, v2, 100);
