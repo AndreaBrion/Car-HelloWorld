@@ -107,6 +107,9 @@ public class Race<T extends Vechicle> {
         //new_race ritorna il Generics passato (qui un Vechicle, in quanto in input ho una Car e
         //una Bicycle -> qual è il tipo comune e più prossimo/vicino ad entrambi fra Car e Bicycle?
         //Vechicle! Ecco perchè è il tipo di ritorno -> inferenza dei tipi!
+        //Se faccio :
+        Car E = new Race<>(C, Y).new_race(100);
+        //Sto dicendo "Cerca il tipo più prossimo a Car fra C e Y
     }
 
 
