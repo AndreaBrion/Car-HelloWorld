@@ -2,7 +2,7 @@ package Unive.vehicles;
 import Unive.vehicles.autovehicles.*;
 import Unive.vehicles.fuel.*;
 
-    public class Race {
+public class Race<T extends Vechicle> {
         /**
          * @param v1 first vehicle
          * @param v2 second vehicle
@@ -61,18 +61,16 @@ import Unive.vehicles.fuel.*;
         System.out.println("Race between a car and a vehicles");
         return -1;
     }
-
-    public class RaceGenerics<T extends Vechicle> {
-        private final T v1, v2;
-        public RaceGenerics(T v1, T v2) {//no problem con i parametri in quanto T estende Vechicle!
-            this.v1 = v1;
-            this.v2 = v2;
+    private final T v1, v2;
+    public Race(T v1, T v2) {//no problem con i parametri in quanto T estende Vechicle!
+        this.v1 = v1;
+        this.v2 = v2;
             //infatti facendo :
             //this.v1.
             //abbiamo a disposizione i metodi di Vechicle!
         }
     //Creiamo un'implementazione di un metodo d'istanza della classe
-        public T new_race(double length) {
+    public T new_race(double length) {
             v1.fullBrake();
             v2.fullBrake();
             double distanceV1 = 0;
@@ -91,7 +89,6 @@ import Unive.vehicles.fuel.*;
             }
 
         }
-    }
 
     public static void main(String[] args) {
         FuelTypeCache cache = new FuelTypeCache();
@@ -102,34 +99,14 @@ import Unive.vehicles.fuel.*;
         Car Y = new Car (0, cache.getFuelTypeFromName("Petrol"));
         Bicycle B = new Bicycle(10, 1 ,1);
         Truck T = new Truck(Diesel);
-
-       /*
-        Car winner = Race.new_race(C, Y, 700);  so che questo ritorna una Vechicle
-        Però otteniamo errore in quanto avrei bisogno di un tipo di ritorno Car
-        dato ciò cambiamo la firma del metodo, da :
-        public static Vechicle new_race(Vechicle v1, Vechicle v2, double length)
-        a :
-        public static <T> T new_race(T v1, T v2, double length)
-        Ovviamente cambiando il relativo corpo del metodo
-        Questo funziona, però T potrebbe essere QUALSIASI COSA -> NON L'HO VINCOLATO AD ESSERE
-        VECHICLE
-        Possiamo però porre dei limiti ai tipi passati come Generics, e lo otteniamo con :
-        public static <T extends Vechicle> T new_race(T v1, T v2, double length)
-        Così indico che T deve essere un Vechicle o un suo sottotipo, infatti ora gli
-        oggetti vedono i metodi getSpeed e fullBrake. Cosa che prima dava errore!
-        Ora non otteniamo più errore con :
-        Car winner = Race.new_race(C, Y, 700);
-        Chiaramente se inseriamo come parametro un tipo che non è Vechicle o suo sottotipo
-        otteniamo errore
-        Posso anche specificare il tipo Generics
-        Car winner = Race.<Vechicle>new_race(C, Y, 700);
-        Qui l'invocazione del metodo funziona, ma il tipo di ritorno che verrà inserito in "winner"
-        è un Vechicle -> Errore, in quanto abbiamo forzato la firma indicando Car
-        Per non ottenere errori :
-        Vechicle winner = Race.<Vechicle>new_race(C, Y, 700);
-
-        */
-
+        //Scrivendo così :
+        Vechicle V = new Race(C,B).new_race(100);
+        //Ci stiamo appoggiando all'inferenza dei tipi che abbiamo su Race
+        //Vechicle V = new Race<Vechicle>(C,B).new_race(100);
+        //Dobbiamo avere un Vechicle a sinistra dell'assegnamento, in quanto il metodo
+        //new_race ritorna il Generics passato (qui un Vechicle, in quanto in input ho una Car e
+        //una Bicycle -> qual è il tipo comune e più prossimo/vicino ad entrambi fra Car e Bicycle?
+        //Vechicle! Ecco perchè è il tipo di ritorno -> inferenza dei tipi!
     }
 
 
