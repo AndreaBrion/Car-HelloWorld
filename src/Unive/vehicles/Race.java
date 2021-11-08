@@ -61,6 +61,12 @@ import Unive.vehicles.fuel.*;
         System.out.println("Race between a car and a vehicles");
         return -1;
     }
+    public class Race<T extends Vechicle> {
+        private final Vechicle v1,v2;
+        public Race(Vechicle v1, Vechicle v2){
+            
+        }
+    }
     public static void main(String[] args) {
         FuelTypeCache cache = new FuelTypeCache();
         FuelType Petrol = new FuelType("Petrol", 1.4, 0.01);
@@ -87,6 +93,15 @@ import Unive.vehicles.fuel.*;
         oggetti vedono i metodi getSpeed e fullBrake. Cosa che prima dava errore!
         Ora non otteniamo più errore con :
         Car winner = Race.new_race(C, Y, 700);
+        Chiaramente se inseriamo come parametro un tipo che non è Vechicle o suo sottotipo
+        otteniamo errore
+        Posso anche specificare il tipo Generics
+        Car winner = Race.<Vechicle>new_race(C, Y, 700);
+        Qui l'invocazione del metodo funziona, ma il tipo di ritorno che verrà inserito in "winner"
+        è un Vechicle -> Errore, in quanto abbiamo forzato la firma indicando Car
+        Per non ottenere errori :
+        Vechicle winner = Race.<Vechicle>new_race(C, Y, 700);
+
         */
 
     }
