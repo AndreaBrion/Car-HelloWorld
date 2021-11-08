@@ -61,12 +61,38 @@ import Unive.vehicles.fuel.*;
         System.out.println("Race between a car and a vehicles");
         return -1;
     }
-    public class Race<T extends Vechicle> {
-        private final Vechicle v1,v2;
-        public Race(Vechicle v1, Vechicle v2){
-            
+
+    public class RaceGenerics<T extends Vechicle> {
+        private final T v1, v2;
+        public RaceGenerics(T v1, T v2) {//no problem con i parametri in quanto T estende Vechicle!
+            this.v1 = v1;
+            this.v2 = v2;
+            //infatti facendo :
+            //this.v1.
+            //abbiamo a disposizione i metodi di Vechicle!
+        }
+    //Creiamo un'implementazione di un metodo d'istanza della classe
+        public T new_race(double length) {
+            v1.fullBrake();
+            v2.fullBrake();
+            double distanceV1 = 0;
+            double distanceV2 = 0;
+            while (true) {
+                distanceV1 += v1.getSpeed();
+                distanceV2 += v2.getSpeed();
+                if (distanceV1 >= length || distanceV2 >= length) {
+                    if (distanceV1 > distanceV2)
+                        return v1;
+                    else
+                        return v2;
+                }
+                v1.accellerate(Math.random() * 10.0);
+                v2.accellerate(Math.random() * 10.0);
+            }
+
         }
     }
+
     public static void main(String[] args) {
         FuelTypeCache cache = new FuelTypeCache();
         FuelType Petrol = new FuelType("Petrol", 1.4, 0.01);
