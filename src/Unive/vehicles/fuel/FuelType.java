@@ -20,6 +20,10 @@ public class FuelType {
         type = t;
         costPerLiter = c;
     }
+    @Override
+    public Object clone() throws CloneNotSupportedException{
+        return new FuelType(type, costPerLiter, ltperKmh);
+    }
     public boolean isCompatible(FuelType tank) {
         //qui c'è un problema concettuale, in refule abbiamo la macchina che prende fuleType della tanica e passa se stessa al fuelType
         //fuelType ha bisogno di vedere un dettagli implementativo interno della Macchina

@@ -24,7 +24,7 @@ public abstract class Vechicle { //astratta visto il metodo accelerate
         if (speed >= 0)
             this.speed = speed;
     }
-    public Vechicle(int initialSpeed) {
+    public Vechicle(double initialSpeed) {
         this.speed = initialSpeed;
     } // questo costruttore non viene invocato dalla classe Unive.vehicles
       // ma vengono invocate dalle sottoclassi!

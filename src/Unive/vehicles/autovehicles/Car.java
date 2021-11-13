@@ -23,25 +23,20 @@ public class Car extends Vechicle { //Qui ho errore in quanto Unive.vehicles è 
         public Car() {
             super(0);
     }
-        public Car(int speed, FuelType f) {
+        public Car(double speed, FuelType f) {
         super(speed);
         fuelType = f;
     }
-    /*
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true; //se ho lo stesso indirizzo sono uguali per forza
-        if (o == null || getClass() != o.getClass()) return false;  // se o è null o se "sono istanze di classe diverse" ritora falso
-        //getClass() != o.getClass() equivale a : !(o instanceOf Car)
-        Car car = (Car) o;
-        return Double.compare(car.fuel, fuel) == 0 && Objects.equals(fuelType, car.fuelType);
-    } //controlliamo infine se il fuel dell'altra Car è uguale a fuel di this e
-      //anche se il fuelType è uguale
-    //Non confronta però la velocità
-    @Override
-    public int hashCode() {
-        return Objects.hash(fuel, fuelType);
-    }*/
+    public Car clone() throws CloneNotSupportedException {//il metodo è protected -> ciò comporta uma visibilità più stretta
+    //Nel momento in cui estendo la classe posso farne un Override ampliando la visibilità -> public
+        Car c = new Car(this.getSpeed(), this.fuelType); //così stiamo facendo una shallowCopy, per una deepCopy : (this.getSpeed(), this.fuelType.clone())
+        //servirebbe però definire clone() in fuelType e anche in quel caso ci darebbe errore in fase di compilazione
+        //in quanto ritorna un Object -> basta fare un cast : (this.getSpeed(), (FuelType) this.fuelType.clone())
+        //oppure basta porre come tipo di ritorno è FuelType, che va bene in quanto sottotipo di Object
+        c.fuel = this.fuel; //visto che clonando in c, c ottiene tutto quello che ha this
+        return c;
+        } //
 
     public void accellerate(double a) {
         double fuelConsumed = computeConsumedFuel(a, fuelType.getLtperKmh());
