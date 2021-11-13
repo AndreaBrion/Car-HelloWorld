@@ -28,15 +28,9 @@ public class Car extends Vechicle { //Qui ho errore in quanto Unive.vehicles è 
         fuelType = f;
     }
     @Override
-    public Car clone() throws CloneNotSupportedException {//il metodo è protected -> ciò comporta uma visibilità più stretta
-    //Nel momento in cui estendo la classe posso farne un Override ampliando la visibilità -> public
-        Car c = new Car(this.getSpeed(), this.fuelType); //così stiamo facendo una shallowCopy, per una deepCopy : (this.getSpeed(), this.fuelType.clone())
-        //servirebbe però definire clone() in fuelType e anche in quel caso ci darebbe errore in fase di compilazione
-        //in quanto ritorna un Object -> basta fare un cast : (this.getSpeed(), (FuelType) this.fuelType.clone())
-        //oppure basta porre come tipo di ritorno è FuelType, che va bene in quanto sottotipo di Object
-        c.fuel = this.fuel; //visto che clonando in c, c ottiene tutto quello che ha this
-        return c;
-        } //
+    public int hashCode() {
+            return this.fuelType.hashCode();
+    }
 
     public void accellerate(double a) {
         double fuelConsumed = computeConsumedFuel(a, fuelType.getLtperKmh());
