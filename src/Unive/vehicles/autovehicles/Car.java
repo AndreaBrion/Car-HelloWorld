@@ -2,6 +2,8 @@ package Unive.vehicles.autovehicles;
 import Unive.vehicles.Vechicle;
 import Unive.vehicles.fuel.*;
 
+import java.util.Objects;
+
 /**
  * This class represents a car
  * @author Andrea Brion 860595
@@ -25,7 +27,23 @@ public class Car extends Vechicle { //Qui ho errore in quanto Unive.vehicles è 
         super(speed);
         fuelType = f;
     }
-        public void accellerate(double a) {
+    /*
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true; //se ho lo stesso indirizzo sono uguali per forza
+        if (o == null || getClass() != o.getClass()) return false;  // se o è null o se "sono istanze di classe diverse" ritora falso
+        //getClass() != o.getClass() equivale a : !(o instanceOf Car)
+        Car car = (Car) o;
+        return Double.compare(car.fuel, fuel) == 0 && Objects.equals(fuelType, car.fuelType);
+    } //controlliamo infine se il fuel dell'altra Car è uguale a fuel di this e
+      //anche se il fuelType è uguale
+    //Non confronta però la velocità
+    @Override
+    public int hashCode() {
+        return Objects.hash(fuel, fuelType);
+    }*/
+
+    public void accellerate(double a) {
         double fuelConsumed = computeConsumedFuel(a, fuelType.getLtperKmh());
         if (fuelConsumed < fuel) {
             super.accellerate(a);
