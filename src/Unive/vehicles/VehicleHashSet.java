@@ -8,7 +8,7 @@ import Unive.vehicles.fuel.FuelType;
 import java.util.HashMap;
 import java.util.HashSet;
 
-public class VehicleHashSet extends HashSet<Vechicle> { //qui ho fissato il tipo -> cioè avrò insiemi di SOLI veicoli
+public class VehicleHashSet<T extends Vechicle> extends HashSet<T> { //qui ho fissato il tipo -> cioè avrò insiemi di SOLI veicoli
 
     public Vechicle new_race(double length) {
         for (Vechicle v : this) {//per ogni Vechicle presente in this (nell'istanza corrente)
@@ -34,7 +34,7 @@ public class VehicleHashSet extends HashSet<Vechicle> { //qui ho fissato il tipo
         }
     }
     public static void main (String[] args){
-        VehicleHashSet set = new VehicleHashSet();
+        VehicleHashSet set = new VehicleHashSet<Vechicle>();
         FuelTypeCache cache = new FuelTypeCache();
         FuelType Petrol = new FuelType("Petrol", 1.4, 0.01);
         FuelType Diesel = new FuelType("Diesel", 1.3, 0.015);
