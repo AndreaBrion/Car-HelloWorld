@@ -2,6 +2,9 @@ package Unive.vehicles;
 import Unive.vehicles.autovehicles.*;
 import Unive.vehicles.fuel.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class Race<T extends Vechicle> {
         /**
          * @param v1 first vehicle
@@ -89,28 +92,39 @@ public class Race<T extends Vechicle> {
             }
 
         }
-
     public static void main(String[] args) {
         FuelTypeCache cache = new FuelTypeCache();
         FuelType Petrol = new FuelType("Petrol", 1.4, 0.01);
         FuelType Diesel = new FuelType("Diesel", 1.3, 0.015);
         FuelTank two_lt = new FuelTank(Diesel, 2);
-        Car C = new Car (0, cache.getFuelTypeFromName("Diesel"));
-        Car Y = new Car (0, cache.getFuelTypeFromName("Petrol"));
-        Bicycle B = new Bicycle(10, 1 ,1);
+        FuelTank two_lt2 = new FuelTank(Diesel, 2);
+        FuelTank three_lt = new FuelTank(Petrol, 2);
+        Car C = new Car(0, cache.getFuelTypeFromName("Diesel"));
+        Car Y = new Car(0, cache.getFuelTypeFromName("Petrol"));
+        Bicycle B = new Bicycle(10, 1, 1);
         Truck T = new Truck(Diesel);
-        //Scrivendo così :
-        Vechicle V = new Race(C,B).new_race(100);
-        //Ci stiamo appoggiando all'inferenza dei tipi che abbiamo su Race
-        //Vechicle V = new Race<Vechicle>(C,B).new_race(100);
-        //Dobbiamo avere un Vechicle a sinistra dell'assegnamento, in quanto il metodo
-        //new_race ritorna il Generics passato (qui un Vechicle, in quanto in input ho una Car e
-        //una Bicycle -> qual è il tipo comune e più prossimo/vicino ad entrambi fra Car e Bicycle?
-        //Vechicle! Ecco perchè è il tipo di ritorno -> inferenza dei tipi!
         //Se faccio :
         Car E = new Race<>(C, Y).new_race(100);
-        //Sto dicendo "Cerca il tipo più prossimo a Car fra C e Y
+        Set<FuelTank> f = new HashSet<FuelTank>(); //Qui per far si che interpreti Set dobbiamo importare java.util.set
+       //
+        f.add(two_lt);
+        f.add(three_lt);
+        f.add(two_lt);
+       //Ho aggiunto 3 elementi, ma il size del Set è 2! (vedi debugger)
+        System.out.println((f.size()));
+        f.add(two_lt2); // Così facendo size dovrebbe essere 3, infatti se
+        // usiamo il debugger nella prossima istruione :
+        System.out.println(two_lt2.equals(two_lt));
+        //otterremo false -> dato dall'implementazione di equals1 dove controlliamo l'id, volendo però possiamo
+        //evitare quel controllo ed allora otterremmo true
+        //Notiamo però che nel Set ho size 3, ma con 2 volte la stessa tanica!
+        f.remove(two_lt2);
+        //se eseguo nuovamente
+        f.remove(two_lt2); // non fa nulla in quanto usa l'hashcode che deriva dalla classe object
+        //Costrutto for each
+        f.add(three_lt);
+        f.add(two_lt);
+        for(FuelTank f1 : f) // dopo i : ci va l'iterable
+            System.out.println(f1.getAmount());
     }
-
-
 }

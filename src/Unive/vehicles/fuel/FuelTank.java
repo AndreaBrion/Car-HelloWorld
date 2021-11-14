@@ -1,4 +1,8 @@
 package Unive.vehicles.fuel;
+
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * This class represents a type of tank
  * @author Andrea Brion 860595
@@ -45,4 +49,15 @@ public class FuelTank {
     public void emptyTank() {
         this.amount = 0;
     }
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof FuelTank) {
+            FuelTank o = (FuelTank) obj;
+            return ((this.amount == o.amount) //&& (this.id == o.id)
+                    && (this.getType().equals(o.getType())));
+        }
+        else
+            return false;
+    }
+
 }

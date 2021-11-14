@@ -27,10 +27,6 @@ public class Car extends Vechicle { //Qui ho errore in quanto Unive.vehicles è 
         super(speed);
         fuelType = f;
     }
-    @Override
-    public int hashCode() {
-            return this.fuelType.hashCode();
-    }
 
     public void accellerate(double a) {
         double fuelConsumed = computeConsumedFuel(a, fuelType.getLtperKmh());
