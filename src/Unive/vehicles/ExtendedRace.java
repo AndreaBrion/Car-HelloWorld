@@ -1,5 +1,5 @@
 package Unive.vehicles;
-
+import Unive.vehicles.Race;
 public class ExtendedRace extends Race {
     public ExtendedRace() {
         super(v1, v2);

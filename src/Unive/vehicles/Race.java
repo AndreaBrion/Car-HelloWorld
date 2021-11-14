@@ -64,7 +64,7 @@ public class Race<T extends Vechicle> {
         System.out.println("Race between a car and a vehicles");
         return -1;
     }
-    private final T v1, v2;
+    private T v1, v2;
     public Race(T v1, T v2) {//no problem con i parametri in quanto T estende Vechicle!
         this.v1 = v1;
         this.v2 = v2;
