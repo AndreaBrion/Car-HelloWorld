@@ -5,7 +5,7 @@ package Unive.vehicles.fuel;
  * @author Andrea Brion 860595
  * @since 1.0
  */
-public class FuelType {
+public class FuelType implements Comparable<FuelType>{
     String type;
     private final double ltperKmh;
     private double costPerLiter;
@@ -54,6 +54,22 @@ public class FuelType {
                 return false;
         }
     }
+
+    @Override //dato compareTo su FuelTank
+    public int compareTo(FuelType o) {
+        if (this.equals(o))
+            return 0;
+        else if (!this.type.equals(o.type))
+                return this.type.compareTo(o.type);
+        else if(this.ltperKmh != o.ltperKmh)
+            return (int) (this.ltperKmh - o.ltperKmh);
+        else
+            return (int) (this.costPerLiter - o.costPerLiter);
+    }// l'unico problema è che nella specifica del compareTo è indicato che
+    //SE ritorna 0 allora gli oggetti sono uguali per forza
+    //Se 2 oggetti sono uguali il compareTo ritorna 0
+    //indicato con (x.compareTo(y)==0) == (x.equals(y))
+    //Vedi appunti
 }
 
 

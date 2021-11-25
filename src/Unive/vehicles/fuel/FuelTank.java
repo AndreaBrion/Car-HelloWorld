@@ -8,7 +8,7 @@ import java.util.Set;
  * @author Andrea Brion 860595
  * @since 1.0
  */
-public class FuelTank {
+public class FuelTank implements Comparable<FuelTank> {
     private FuelType type;
     private double amount;
     private int id;
@@ -60,4 +60,14 @@ public class FuelTank {
             return false;
     }
 
+    @Override
+    public int compareTo(FuelTank o) {
+        if (this.equals(o)) //se i 2 oggetti sono uguali deve ritornare 0
+            return 0;
+        else if (this.amount != o.amount) //Se i 2 oggetti sono uguali avranno stesso amount e type
+            return (int) (this.amount-o.amount);
+        else //se abbiamo stesso amount di carburante
+            return this.type.compareTo(o.type); //questo non funziona se prima non lo definiamo su FuelType
+
+    }
 }

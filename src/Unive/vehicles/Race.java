@@ -4,6 +4,7 @@ import Unive.vehicles.fuel.*;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class Race<T extends Vechicle> {
         /**
@@ -103,28 +104,19 @@ public class Race<T extends Vechicle> {
         Car Y = new Car(0, cache.getFuelTypeFromName("Petrol"));
         Bicycle B = new Bicycle(10, 1, 1);
         Truck T = new Truck(Diesel);
-        //Se faccio :
-        Car E = new Race<>(C, Y).new_race(100);
-        Set<FuelTank> f = new HashSet<FuelTank>(); //Qui per far si che interpreti Set dobbiamo importare java.util.set
-       //
-        f.add(two_lt);
-        f.add(three_lt);
-        f.add(two_lt);
-       //Ho aggiunto 3 elementi, ma il size del Set è 2! (vedi debugger)
-        System.out.println((f.size()));
-        f.add(two_lt2); // Così facendo size dovrebbe essere 3, infatti se
-        // usiamo il debugger nella prossima istruione :
-        System.out.println(two_lt2.equals(two_lt));
-        //otterremo false -> dato dall'implementazione di equals1 dove controlliamo l'id, volendo però possiamo
-        //evitare quel controllo ed allora otterremmo true
-        //Notiamo però che nel Set ho size 3, ma con 2 volte la stessa tanica!
-        f.remove(two_lt2);
-        //se eseguo nuovamente
-        f.remove(two_lt2); // non fa nulla in quanto usa l'hashcode che deriva dalla classe object
-        //Costrutto for each
-        f.add(three_lt);
-        f.add(two_lt);
-        for(FuelTank f1 : f) // dopo i : ci va l'iterable
-            System.out.println(f1.getAmount());
+        TreeSet<FuelTank> tanks = new TreeSet<>();//crea un insieme di elementi ordinati, qui
+        tanks.add(two_lt);// però non indico il tipo di ordine!
+        tanks.add(two_lt2);
+        tanks.add(three_lt);
+
+        /*cosa succede se :
+        TreeSet<Vechicle> Ve = new TreeSet<>();
+        Ve.add(C); //errore! In quanto l'oggetto non è comparable!
+        Ve.add(B); //Nel momento in cui inseriamo dei elementi, il
+        Ve.add(T); //TreeSet deve essere in grado di compararli
+        Quindi al posto di avere un controllo statico (che mi dice : Occhio, stai facendo un TreeSet di Vechicle
+        e questi NON SONO COMPARABLE)il compilatore effettua un controllo dinamico (nel momento in cui viene aggiunto
+        qualcosa di NON comparable blocca l'esecuzione
+        */
     }
 }
