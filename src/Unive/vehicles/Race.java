@@ -71,7 +71,7 @@ public class Race<T extends Vechicle> {
             //abbiamo a disposizione i metodi di Vechicle!
         }
     //Creiamo un'implementazione di un metodo d'istanza della classe
-    public T new_race(double length) throws ImpossibleAccellerateException {
+    public static <T extends Vechicle> T new_race(T v1, T v2, double length) {
             v1.fullBrake();
             v2.fullBrake();
             double distanceV1 = 0;
@@ -85,8 +85,13 @@ public class Race<T extends Vechicle> {
                     else
                         return v2;
                 }
-                v1.accellerate(Math.random() * 10.0);
-                v2.accellerate(Math.random() * 10.0);
+                try {
+                    v1.accellerate(Math.random() * 10.0);
+                    v2.accellerate(Math.random() * 10.0);
+                } catch (ImpossibleAccellerateException e) {
+                    System.err.println("This is quite unexpected"); //non System.out
+                    throw new IllegalArgumentException("Random should never return a negative value");
+                }
             }
 
         }
@@ -99,12 +104,17 @@ public class Race<T extends Vechicle> {
         FuelTank three_lt = new FuelTank(Petrol, 2);
         Car C = new Car(0, cache.getFuelTypeFromName("Diesel"));
         Car Y = new Car(0, cache.getFuelTypeFromName("Petrol"));
-        Bicycle B = new Bicycle(10, 1, 1);
+        Bicycle B = new Bicycle(0   , 1, 1);
+        Bicycle b = new Bicycle(0,1,1);
         Truck T = new Truck(Diesel);
+        Race.new_race(B, b, 100);
+        
 
-        Car n = new Car(0 , new FuelType("diesel", 0, 0)); //Non da problemi
+
+
+        //Car n = new Car(0 , new FuelType("diesel", 0, 0)); //Non da problemi
         //n.accellerate(-100); //errore perchè velocità negativa
-        n.accellerate(10); //errore perche non ha benzina!
+       // n.accellerate(10); //errore perche non ha benzina!
         /*
         Throw è una keyword che va solo con sottotipi throwable, infatti fare
         throw n; da errore
