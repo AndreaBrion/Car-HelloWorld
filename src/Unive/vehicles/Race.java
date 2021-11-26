@@ -93,10 +93,16 @@ public class Race<T extends Vechicle> {
                     return null;
                 }
                  catch (ImpossibleAccellerateException e) {
-                    System.err.println("This is quite unexpected"); //non System.out
-                    throw new IllegalArgumentException("Random should never return a negative value");
+                    throw new IllegalArgumentException("Random should never return a negative value", e);
+                    /*All'interno dei Throwable possiamo anche indicare quale eccezione si è verificata e
+                    abbiamo 2 possibilità, quella sopra e :
+                    IllegalArgumentException r = new IllegalArgumentException("Random should never return a negative value");
+                    r.initCause();
+                    throw r;
+                    Il metodo initCause può essere invocato SOLO una volta in quanto la causa di un'eccezione può
+                    essere settata solo una volta!
+                     */
                 }
-            }
         finally {
             v1.fullBrake();
             v2.fullBrake();
