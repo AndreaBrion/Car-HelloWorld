@@ -72,29 +72,37 @@ public class Race<T extends Vechicle> {
         }
     //Creiamo un'implementazione di un metodo d'istanza della classe
     public static <T extends Vechicle> T new_race(T v1, T v2, double length) {
+        try {
             v1.fullBrake();
             v2.fullBrake();
             double distanceV1 = 0;
             double distanceV2 = 0;
-            while (true) {
+            while (!(distanceV1 >= length || distanceV2 >= length)) {
                 distanceV1 += v1.getSpeed();
                 distanceV2 += v2.getSpeed();
-                if (distanceV1 >= length || distanceV2 >= length) {
-                    if (distanceV1 > distanceV2)
-                        return v1;
-                    else
-                        return v2;
+                v1.accellerate(Math.random() * 10.0);
+                v2.accellerate(Math.random() * 10.0);
+            }
+            if (distanceV1 > distanceV2)
+                return v1;
+            else
+                return v2;
+        }
+                catch (OutOfMemoryError e) {
+                    System.err.println("This is quite unexpected"); //non System.out
+                    throw new IllegalArgumentException("Random should never return a negative value");
                 }
-                try {
-                    v1.accellerate(Math.random() * 10.0);
-                    v2.accellerate(Math.random() * 10.0);
-                } catch (ImpossibleAccellerateException e) {
+                 catch (ImpossibleAccellerateException e) {
                     System.err.println("This is quite unexpected"); //non System.out
                     throw new IllegalArgumentException("Random should never return a negative value");
                 }
             }
-
+        finally {
+            v1.fullBrake();
+            v2.fullBrake();
         }
+    }
+
     public static void main(String[] args) throws ImpossibleAccellerateException {
         FuelTypeCache cache = new FuelTypeCache();
         FuelType Petrol = new FuelType("Petrol", 1.4, 0.01);
@@ -108,7 +116,7 @@ public class Race<T extends Vechicle> {
         Bicycle b = new Bicycle(0,1,1);
         Truck T = new Truck(Diesel);
         Race.new_race(B, b, 100);
-        
+
 
 
 
