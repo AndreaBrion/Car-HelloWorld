@@ -102,57 +102,24 @@ public class Race<T extends Vechicle> {
         Car Y = new Car(0, cache.getFuelTypeFromName("Petrol"));
         Bicycle B = new Bicycle(10, 1, 1);
         Truck T = new Truck(Diesel);
-        TreeSet<FuelTank> tanks = new TreeSet<>();//crea un insieme di elementi ordinati, qui
-        tanks.add(two_lt);// però non indico il tipo di ordine!
-        tanks.add(two_lt2);
-        tanks.add(three_lt);
 
-        //Vediamo come possiamo assegnare un tipo ad un altro
-        //E' possibile farlo se si passa da un tipo a 64b ad uno a 32b
-        int i = 100;
-        long j = 1000000;
-        j = i; //non da problemi
-     // i = j da problemi! dobbiamo invece fare il cast :
-        i = (int) j;
-     // Oppure possiamo fare
-        i = Long.valueOf(j).intValue();
-
-        //Proviamo a fare una lista di interi
-        //List<int> list = new List<int>(); Questo da errore in quanto i tipi generici non possono
-        //essere primitivi
-        //Se passiamo un generics questo deve essere per forza onject o sotto
-        List<Integer> list = new ArrayList<Integer>();
-        //Vediamo come la classe wrapper Integer ci permettono di usare i valori primitivi come Generics e nelle
-        //varie collections
-        list.add(1);
-      //list.add(1.0); Errore!
-
-        //Da notare che
-        Integer wI = i; // che funziona!
-        //Con i wrapper viene fatto boxing e unboxing, ,l'istruzione sopra si traduce in
-        //Integer wI = Integer.valueOf(i);
-        //Chiaramente otteniamo errore nei seguenti assegnamenti
-        //wI = 1.0;
-        //i = 1.0;
-        //Dovremmo
-        //wI = Double.ValueOf(1.0).intValue();
-        //Un altro esempio
-        //Double d = 1; da errore!
-        //Mentre invece
-        //double d = 1; funziona!
-        //Questo perchè double ha una maggior precisione di int e quindi è permesso
-        //Con i wrapper invece otteniamo errore perchè il compilatore fa
-        //Double d = Double.valueOf(1);
-        //In generale usando il wrapping di oggetti posso assegnare un valore numerico ad un tipo wrapper identico
-        //al tipo di quel valore numerico
-        //NON VALGONO LE CONVERSIONI IMPLICITE DEI TIPI PRIMITIVI
-        //Se io eseguo
-        int r = wI;
-        //Così penso di assegnare ad r un puntatore ad un wrapper, ma qui Java non inserisce il puntatore
-        //Qui Java esegue unboxing (prendo l'oggetto wrapper e ritorno il valore)
-        //Boxing è prendo il valore e creo l'oggetto
-        //Nell'istruzione sopra infatti il compilatore usa il metodo intValue() della classe Integer
-        //vedi es sopra : //Integer wI = Integer.valueOf(i);
+        Car n = new Car(0 , null); //Non da problemi
+        /*
+        n.accellerate(10); Qui quando in accellerate() calcoliamo il carburante necessario -> errore
+        Errore : No pointer exception dato il fatto che n.fuelType è null!
+        n.accellerate(1/0); Errore
+        Errore : Arithmetic exception
+        List<Integer> list = new ArrayList();
+        while(true) {
+            list.add(1);
+        }
+        Questo crea un errore : Out of memory! (ho terminato lo spazio dello heap)
+        In java quando riempiamo la memoria prima di dare errore il garbage collector prova a liberare memoria!
+        Su strutture dati complesse il garbage collector può andare in timeout in quanto impiega troppo tempo per
+        trovare memoria da liberare
+        Ma dove è terminata?
+        Le eccezioni sono
+         */
 
     }
 }
