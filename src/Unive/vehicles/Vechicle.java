@@ -8,12 +8,20 @@ public abstract class Vechicle { //astratta visto il metodo accelerate
      * @param a of speed in km/h. If there is not enough fuel, it accelerates as much as possible
      *
      * @requires amount >= 0
+     * @throws NegativeSpeedException se la quantità di accellerazione data è negativa
      * @ensures if (computeConsumedFuel(amount, fuelType.getLtperKmh());) < fuel -> speed = pre(speed) + amount
      * @ensures if (computeConsumedFuel(amount, fuelType.getLtperKmh());) >= fuel -> speed = pre(speed) + fuel/fuelType.getLitresPerKmh()
      */
-    public void accellerate (double a){
-        if (a>0)
+    //Per far sì che possa lanciare eccezioni dobbiamo indicarlo
+    //Dobbiamo indicare la stessa cosa per OGNI CLASSE CHE POTREBBE LANCIARE UN ECCEZIONE USANDO ACCELLERATE!
+    //Quindi : Race, Car, Truck, VechicleHashSet, ExtendedRace
+    public void accellerate (double a) throws NegativeSpeedException, InconsistentSpeedException {
+        if (this.speed < 0)
+            throw new InconsistentSpeedException();
+        if (a >= 0)
             this.speed += a;
+        else
+            throw new NegativeSpeedException(a);
         // potevamo usare anche this.setSpeed(a);
         // Però super.speed è più corretta!
     }

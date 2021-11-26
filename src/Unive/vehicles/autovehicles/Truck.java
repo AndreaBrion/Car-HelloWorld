@@ -1,9 +1,6 @@
 package Unive.vehicles.autovehicles;
-import Unive.vehicles.LoadableUnloadable;
+import Unive.vehicles.*;
 import Unive.vehicles.fuel.FuelType;
-import Unive.vehicles.autovehicles.Car;
-import Unive.vehicles.Loadable;
-import Unive.vehicles.Printable;
 
 public class Truck extends Car implements Loadable, Printable, LoadableUnloadable {
     private double speed;
@@ -11,7 +8,7 @@ public class Truck extends Car implements Loadable, Printable, LoadableUnloadabl
     public Truck (FuelType f){
         super(f);
     }
-    public void accellerate(double a) {
+    public void accellerate(double a) throws NegativeSpeedException, InconsistentSpeedException {
         // qui 1000 sono per dare una percentuale!
         double fuelConsumed = computeConsumedFuel(a, this.getFuelType().getLtperKmh());
             super.accellerate(a*(1+loadedCharge/1000));

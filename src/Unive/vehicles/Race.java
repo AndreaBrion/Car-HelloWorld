@@ -1,8 +1,7 @@
 package Unive.vehicles;
 import Unive.vehicles.autovehicles.*;
+import Unive.vehicles.fuel.FuelNotSufficientException;
 import Unive.vehicles.fuel.*;
-
-import java.util.*;
 
 public class Race<T extends Vechicle> {
         /**
@@ -11,7 +10,7 @@ public class Race<T extends Vechicle> {
          * @param length
          * @return the id of the winner or "-1" if there is a draw
          */
-    public static int race (Vechicle v1, Vechicle v2, double length) {
+    public static int race (Vechicle v1, Vechicle v2, double length) throws NegativeSpeedException, InconsistentSpeedException, FuelNotSufficientException {
         //qui viene invocato la versione di accellerate corretta sulla base della
         //classe di v1 e v2, se v1 è una bici viene usato accellerate di Bicycle!
         System.out.println("Race between vehicles");
@@ -63,7 +62,7 @@ public class Race<T extends Vechicle> {
         System.out.println("Race between a car and a vehicles");
         return -1;
     }
-    private T v1, v2;
+    protected T v1, v2;
     public Race(T v1, T v2) {//no problem con i parametri in quanto T estende Vechicle!
         this.v1 = v1;
         this.v2 = v2;
@@ -72,7 +71,7 @@ public class Race<T extends Vechicle> {
             //abbiamo a disposizione i metodi di Vechicle!
         }
     //Creiamo un'implementazione di un metodo d'istanza della classe
-    public T new_race(double length) {
+    public T new_race(double length) throws NegativeSpeedException, InconsistentSpeedException {
             v1.fullBrake();
             v2.fullBrake();
             double distanceV1 = 0;
@@ -91,7 +90,7 @@ public class Race<T extends Vechicle> {
             }
 
         }
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NegativeSpeedException, InconsistentSpeedException {
         FuelTypeCache cache = new FuelTypeCache();
         FuelType Petrol = new FuelType("Petrol", 1.4, 0.01);
         FuelType Diesel = new FuelType("Diesel", 1.3, 0.015);
@@ -103,22 +102,12 @@ public class Race<T extends Vechicle> {
         Bicycle B = new Bicycle(10, 1, 1);
         Truck T = new Truck(Diesel);
 
-        Car n = new Car(0 , null); //Non da problemi
+        Car n = new Car(0 , Petrol); //Non da problemi
+        n.accellerate(-100);
         /*
-        n.accellerate(10); Qui quando in accellerate() calcoliamo il carburante necessario -> errore
-        Errore : No pointer exception dato il fatto che n.fuelType è null!
-        n.accellerate(1/0); Errore
-        Errore : Arithmetic exception
-        List<Integer> list = new ArrayList();
-        while(true) {
-            list.add(1);
-        }
-        Questo crea un errore : Out of memory! (ho terminato lo spazio dello heap)
-        In java quando riempiamo la memoria prima di dare errore il garbage collector prova a liberare memoria!
-        Su strutture dati complesse il garbage collector può andare in timeout in quanto impiega troppo tempo per
-        trovare memoria da liberare
-        Ma dove è terminata?
-        Le eccezioni sono
+        Throw è una keyword che va solo con sottotipi throwable, infatti fare
+        throw n; da errore
+
          */
 
     }

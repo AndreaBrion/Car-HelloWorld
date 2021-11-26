@@ -1,11 +1,13 @@
 package Unive.vehicles;
-import Unive.vehicles.Race;
+
+import Unive.vehicles.fuel.FuelNotSufficientException;
+
 public class ExtendedRace extends Race {
-    public ExtendedRace() {
+    public ExtendedRace(Vechicle v1, Vechicle v2) {
         super(v1, v2);
     }
 
-    public static int race(Vechicle v1, Vechicle v2, double lenght){
+    public static int race(Vechicle v1, Vechicle v2, double lenght) throws NegativeSpeedException, InconsistentSpeedException, FuelNotSufficientException {
         System.out.println("Racing in the esxtended version");
         return Race.race(v1, v2, 100);
         //Se facessimo :

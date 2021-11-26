@@ -10,7 +10,7 @@ import java.util.HashSet;
 
 public class VehicleHashSet<T extends Vechicle> extends HashSet<T> { //qui ho fissato il tipo -> cioè avrò insiemi di SOLI veicoli
 
-    public Vechicle new_race(double length) {
+    public Vechicle new_race(double length) throws NegativeSpeedException, InconsistentSpeedException {
         for (Vechicle v : this) {//per ogni Vechicle presente in this (nell'istanza corrente)
             v.fullBrake();
         }
@@ -33,7 +33,7 @@ public class VehicleHashSet<T extends Vechicle> extends HashSet<T> { //qui ho fi
             }//Questo accellera ogni Vechicle
         }
     }
-    public static void main (String[] args){
+    public static void main (String[] args) throws NegativeSpeedException, InconsistentSpeedException {
         VehicleHashSet set = new VehicleHashSet<Vechicle>();
         FuelTypeCache cache = new FuelTypeCache();
         FuelType Petrol = new FuelType("Petrol", 1.4, 0.01);
