@@ -90,7 +90,7 @@ public class Race<T extends Vechicle> {
         }
                 catch (OutOfMemoryError e) {
                     System.err.println("This is quite unexpected"); //non System.out
-                    throw new IllegalArgumentException("Random should never return a negative value");
+                    return null;
                 }
                  catch (ImpossibleAccellerateException e) {
                     System.err.println("This is quite unexpected"); //non System.out
