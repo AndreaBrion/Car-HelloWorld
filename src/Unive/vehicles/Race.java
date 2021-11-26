@@ -10,7 +10,7 @@ public class Race<T extends Vechicle> {
          * @param length
          * @return the id of the winner or "-1" if there is a draw
          */
-    public static int race (Vechicle v1, Vechicle v2, double length) throws NegativeSpeedException, InconsistentSpeedException, FuelNotSufficientException {
+    public static int race (Vechicle v1, Vechicle v2, double length) throws ImpossibleAccellerateException {
         //qui viene invocato la versione di accellerate corretta sulla base della
         //classe di v1 e v2, se v1 è una bici viene usato accellerate di Bicycle!
         System.out.println("Race between vehicles");
@@ -71,7 +71,7 @@ public class Race<T extends Vechicle> {
             //abbiamo a disposizione i metodi di Vechicle!
         }
     //Creiamo un'implementazione di un metodo d'istanza della classe
-    public T new_race(double length) throws NegativeSpeedException, InconsistentSpeedException {
+    public T new_race(double length) throws ImpossibleAccellerateException {
             v1.fullBrake();
             v2.fullBrake();
             double distanceV1 = 0;
@@ -90,7 +90,7 @@ public class Race<T extends Vechicle> {
             }
 
         }
-    public static void main(String[] args) throws NegativeSpeedException, InconsistentSpeedException {
+    public static void main(String[] args) throws ImpossibleAccellerateException {
         FuelTypeCache cache = new FuelTypeCache();
         FuelType Petrol = new FuelType("Petrol", 1.4, 0.01);
         FuelType Diesel = new FuelType("Diesel", 1.3, 0.015);
@@ -102,12 +102,12 @@ public class Race<T extends Vechicle> {
         Bicycle B = new Bicycle(10, 1, 1);
         Truck T = new Truck(Diesel);
 
-        Car n = new Car(0 , Petrol); //Non da problemi
-        n.accellerate(-100);
+        Car n = new Car(0 , new FuelType("diesel", 0, 0)); //Non da problemi
+        //n.accellerate(-100); //errore perchè velocità negativa
+        n.accellerate(10); //errore perche non ha benzina!
         /*
         Throw è una keyword che va solo con sottotipi throwable, infatti fare
         throw n; da errore
-
          */
 
     }

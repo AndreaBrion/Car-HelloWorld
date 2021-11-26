@@ -15,7 +15,7 @@ public abstract class Vechicle { //astratta visto il metodo accelerate
     //Per far sì che possa lanciare eccezioni dobbiamo indicarlo
     //Dobbiamo indicare la stessa cosa per OGNI CLASSE CHE POTREBBE LANCIARE UN ECCEZIONE USANDO ACCELLERATE!
     //Quindi : Race, Car, Truck, VechicleHashSet, ExtendedRace
-    public void accellerate (double a) throws NegativeSpeedException, InconsistentSpeedException {
+    public void accellerate (double a) throws ImpossibleAccellerateException {
         if (this.speed < 0)
             throw new InconsistentSpeedException();
         if (a >= 0)

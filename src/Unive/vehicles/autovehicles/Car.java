@@ -1,4 +1,5 @@
 package Unive.vehicles.autovehicles;
+import Unive.vehicles.ImpossibleAccellerateException;
 import Unive.vehicles.InconsistentSpeedException;
 import Unive.vehicles.NegativeSpeedException;
 import Unive.vehicles.Vechicle;
@@ -29,16 +30,19 @@ public class Car extends Vechicle { //Qui ho errore in quanto Unive.vehicles è 
         fuelType = f;
     }
 
-    public void accellerate(double a) throws NegativeSpeedException, InconsistentSpeedException {
+    public void accellerate(double a) throws ImpossibleAccellerateException {
         double fuelConsumed = computeConsumedFuel(a, fuelType.getLtperKmh());
         if (fuelConsumed < fuel) {
             super.accellerate(a);
             fuel = fuel - fuelConsumed;
         }
         else {
+            /*
             double increaseSpeed = fuel / fuelType.getCostPerLiter();
             super.accellerate(increaseSpeed);
             fuel = 0;
+            */
+            throw new FuelNotSufficientException(fuelConsumed, fuel);
         }
     }
         public boolean isFuelEmpty() {
@@ -73,7 +77,7 @@ public class Car extends Vechicle { //Qui ho errore in quanto Unive.vehicles è 
         public double getFuelCons () {
         return this.fuelType.getCostPerLiter();
     }
-        public static void main(String[] args) throws NegativeSpeedException, InconsistentSpeedException, FuelNotSufficientException {
+        public static void main(String[] args) throws ImpossibleAccellerateException {
             Car myCar = new Car();
             FuelType diesel = new FuelType("Diesel", 0.01, 1.4);
             myCar.fuelType = diesel;

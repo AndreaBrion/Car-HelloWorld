@@ -8,7 +8,7 @@ public class Truck extends Car implements Loadable, Printable, LoadableUnloadabl
     public Truck (FuelType f){
         super(f);
     }
-    public void accellerate(double a) throws NegativeSpeedException, InconsistentSpeedException {
+    public void accellerate(double a) throws ImpossibleAccellerateException {
         // qui 1000 sono per dare una percentuale!
         double fuelConsumed = computeConsumedFuel(a, this.getFuelType().getLtperKmh());
             super.accellerate(a*(1+loadedCharge/1000));

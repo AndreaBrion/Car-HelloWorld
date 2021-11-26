@@ -7,7 +7,7 @@ public class ExtendedRace extends Race {
         super(v1, v2);
     }
 
-    public static int race(Vechicle v1, Vechicle v2, double lenght) throws NegativeSpeedException, InconsistentSpeedException, FuelNotSufficientException {
+    public static int race(Vechicle v1, Vechicle v2, double lenght) throws ImpossibleAccellerateException {
         System.out.println("Racing in the esxtended version");
         return Race.race(v1, v2, 100);
         //Se facessimo :
