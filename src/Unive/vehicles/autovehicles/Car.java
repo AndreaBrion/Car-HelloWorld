@@ -30,7 +30,7 @@ public class Car extends Vechicle { //Qui ho errore in quanto Unive.vehicles è 
         fuelType = f;
     }
 
-    public void accellerate(double a) throws ImpossibleAccellerateException {
+        public void accellerate(double a) throws ImpossibleAccellerateException {
         double fuelConsumed = computeConsumedFuel(a, fuelType.getLtperKmh());
         if (fuelConsumed < fuel) {
             super.accellerate(a);
@@ -45,6 +45,7 @@ public class Car extends Vechicle { //Qui ho errore in quanto Unive.vehicles è 
             throw new FuelNotSufficientException(fuelConsumed, fuel);
         }
     }
+
         public boolean isFuelEmpty() {
             if (fuel <= 0) {
                 super.setSpeed(0); // Qui setSpeed è visibile SSE è un metodo protected o public (per
@@ -55,6 +56,11 @@ public class Car extends Vechicle { //Qui ho errore in quanto Unive.vehicles è 
             }
             else
                 return false;
+        }
+
+        @Deprecated
+        public void refuel (int amount) {
+                fuel = fuel + amount;
         }
         public void refuel (FuelTank tank) {
             if (this.getFuelType().isCompatible(this.fuelType)) {
