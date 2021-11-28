@@ -25,6 +25,13 @@ public abstract class Vechicle { //astratta visto il metodo accelerate
         // potevamo usare anche this.setSpeed(a);
         // Però super.speed è più corretta!
     }
+
+    /*
+    * Avremo :
+    * @Speed(forward = true, type = "Kp/h")
+    * public double getSpeed() {return speed;}
+    * così fa da commento strutturato
+    */
     public double getSpeed() {
         return speed;
     }
@@ -32,7 +39,7 @@ public abstract class Vechicle { //astratta visto il metodo accelerate
         if (speed >= 0)
             this.speed = speed;
     }
-    public Vechicle(double initialSpeed) {
+    public Vechicle(@Speed(forward = true) double initialSpeed) {
         this.speed = initialSpeed;
     } // questo costruttore non viene invocato dalla classe Unive.vehicles
       // ma vengono invocate dalle sottoclassi!
@@ -53,6 +60,12 @@ public abstract class Vechicle { //astratta visto il metodo accelerate
      * @author Andrea Brion
      * @since 1.0
      */
+
+    /*
+    Qui avremo :
+    public void brake (@Speed(forward = false) double amount) {
+    forward = false per dare l'idea di che la velocità è negativa -> stiamo frenando
+    * */
     public void brake (double amount) {
         if (amount > speed)
             this.fullBrake();

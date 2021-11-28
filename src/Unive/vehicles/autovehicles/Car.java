@@ -29,7 +29,17 @@ public class Car extends Vechicle { //Qui ho errore in quanto Unive.vehicles è 
         super(speed);
         fuelType = f;
     }
-
+    /* Indicando così :
+       public void accellerate(@Speed double a) throws ImpossibleAccellerateException {
+       Otteniamo errore, in quanto forward non ha un valore, quindi
+       public void accellerate(@Speed(forward = true) double a) throws ImpossibleAccellerateException {
+       Forward l'ho definito, ma non ho definito il tipo! In quanto ciascun valore della mia annotazione
+       può avere un valore di dafault (indicato nella classe Speed -> Km/h
+       Infatti equivalre a scrivere
+       public void accellerate(@Speed(forward = true, type = "Km/h") double a) throws ImpossibleAccellerateException {
+       Tutti gli attributi vengono sempre definiti, se ho dato un valore di default posso fare a meno altrimenti
+       se non glielo ho dato devo indicarlo (come per forward!)
+     */
         public void accellerate(double a) throws ImpossibleAccellerateException {
         double fuelConsumed = computeConsumedFuel(a, fuelType.getLtperKmh());
         if (fuelConsumed < fuel) {
@@ -45,7 +55,6 @@ public class Car extends Vechicle { //Qui ho errore in quanto Unive.vehicles è 
             throw new FuelNotSufficientException(fuelConsumed, fuel);
         }
     }
-
         public boolean isFuelEmpty() {
             if (fuel <= 0) {
                 super.setSpeed(0); // Qui setSpeed è visibile SSE è un metodo protected o public (per
@@ -57,7 +66,6 @@ public class Car extends Vechicle { //Qui ho errore in quanto Unive.vehicles è 
             else
                 return false;
         }
-
         @Deprecated
         public void refuel (int amount) {
                 fuel = fuel + amount;
@@ -99,20 +107,3 @@ public class Car extends Vechicle { //Qui ho errore in quanto Unive.vehicles è 
             System.out.println(myCar.getSpeed());
         }
 }
-
-//Commenti : Devono essere strutturati ed esternamente visibili
-//  	   Una volta compilato il codice, i commenti non si vedono più -> visibili solo nel sorgente
-//	   // - /* */ -> Commenti interni, persi alla compilazione -> commenti che servono al creatore del codice o a chi ci lavorera, ma non servono all'utilizzatore della libreria
-//	   /** */ -> Commenti simili agli interni, usati prima della dichiarazione di una classe, di un campo pubblico, di un metodo pubblico
-//	   Javadoc -> costruiamo una documentazione apposita -> crea una pagina per classe
-//	   	      Vedi slides
-//	   	      Per costruire la pagina html dopo aver posto i commenti digitare da shell :
-//		      "cd C:\Users\Utente\Desktop\Esami Settembre\Esami gennaio\Java Mod I\EserciziInClasse\L1\src>
-//                       javadoc autovehicles.NomeClasse"
-//	   	      Otteniamo così un file html nella directory del file sorgente
-//		      Dall'idee però possiamo creare lo stesso file con più facilità (possiamo anche determinare che commenti rendere visibili o meno)
-//	 	      Il file creato andrà nel file html di nome "index"
-//	   	      Regole per commentare :
-//              Commentare le tutto ciò che è public
-//              Non commentare tutto ciòche è private
-//              Decidere se commentare ciò che è protected/default

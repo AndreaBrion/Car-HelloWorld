@@ -122,7 +122,7 @@ public class Race<T extends Vechicle> {
         Bicycle b = new Bicycle(0,1,1);
         Truck T = new Truck(Diesel);
         Race.new_race(B, b, 100);
-        
+
 
 
 
