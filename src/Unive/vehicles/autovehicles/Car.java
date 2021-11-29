@@ -1,10 +1,10 @@
 package Unive.vehicles.autovehicles;
-import Unive.vehicles.ImpossibleAccellerateException;
-import Unive.vehicles.InconsistentSpeedException;
-import Unive.vehicles.NegativeSpeedException;
-import Unive.vehicles.Vechicle;
+import Unive.vehicles.*;
 import Unive.vehicles.fuel.FuelNotSufficientException;
 import Unive.vehicles.fuel.*;
+import org.junit.Test;
+
+import javax.xml.soap.Text;
 
 /**
  * This class represents a car

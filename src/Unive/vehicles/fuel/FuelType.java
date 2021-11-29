@@ -1,13 +1,24 @@
 package Unive.vehicles.fuel;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.annotation.*;
+import java.io.FileReader;
+import java.io.IOException;
+
 /**
  * This class represents a type of fuel
  * @author Andrea Brion 860595
  * @since 1.0
  */
+@XmlRootElement
+@XmlType
 public class FuelType implements Comparable<FuelType>{
+    @XmlElement
     String type;
+    @XmlAnyAttribute
     private final double ltperKmh;
+    @XmlAnyAttribute
     private double costPerLiter;
     double FUEL_CONS;
     public FuelType(String t, double c, double l) {
@@ -54,7 +65,6 @@ public class FuelType implements Comparable<FuelType>{
                 return false;
         }
     }
-
     @Override //dato compareTo su FuelTank
     public int compareTo(FuelType o) {
         if (this.equals(o))
@@ -70,6 +80,25 @@ public class FuelType implements Comparable<FuelType>{
     //Se 2 oggetti sono uguali il compareTo ritorna 0
     //indicato con (x.compareTo(y)==0) == (x.equals(y))
     //Vedi appunti
+    /*
+    public static void main (String[] args) throws JAXBException, IOException {
+        FuelType f = new FuelType("Diesel", 0.015, 0.01);
+        marshal(f);
+    }
+    * Questo metodo va in crash in quanto non abbiamo un costruttore senza arogmento*/
+    public FuelType() {
+        this("",0.0);
+    }
+    public static void main (String[] args) throws JAXBException, IOException {
+        FuelType f = new FuelType("Diesel", 0.015, 0.01);
+        marshal(f);
+        //FuelType f2 = unmarshall(); Così facciamo l'inverso, unmarshall() prende in automatico il file FuelType
+       // System.out.println("ko");
+    }
+    static FuelType marshal(FuelType f) throws JAXBException, IOException {
+            JAXBContext context = JAXBContext.newInstance(FuelType.class);
+            return (FuelType) context.createUnmarshaller().unmarshal(new FileReader("./f.xml")); //scriviamo nel file xml l'informazione
+        }
 }
 
 
