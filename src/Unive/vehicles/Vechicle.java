@@ -1,7 +1,7 @@
 package Unive.vehicles;
 
 public class Vechicle { //astratta visto il metodo accelerate
-    public double speed = 0;
+    private double speed = 0;
     /**
      * Accelerate the vehicle of the given amount of km/h
      *

@@ -130,40 +130,33 @@ public class Race<T extends Vechicle> {
         //Vediamo come ispezionare il contenuto della classe tramite Reflection
         Class v = Car.class; //v è un'stanza di classe che rappresenta Car
         Class superclass = v.getSuperclass();
-        //così vedo speed e stampo
-        for(Field f : superclass.getDeclaredFields())
-            System.out.println(f);
-        //Vogliamo prendere l'oggetto fields che ci rappresenta la speed
-        //Field speedField = superclass.getField("speed");
-        /*Questo ridà un'eccezione in quanto NON VEDE speed perchè privata in Vechicle!
-        speed NON è pubblico, getField vede solo i pubblici
-        Cambiare il modifier per vedene gli effetti
-        Scrivendo
-        speedField.get
-        Notiamo che abbiamo a disposizione un sacco di getter, perchè un campo può essere di qualsiasi
-        tipo
-        Posso anche eseguire
-        speedField.get()
-        Il quale prende un Object e ritorna un Object, qui notiamo i primi problemi :
-        Anche se per ogni tipo primitivo o un get : getBoolean, getChar ecc...
-        *
-        speedField.getDouble(v1);
-        Qui di nuovo troviamo dei problemi
-        Se ho un campo non è detto che vi abbia accesso (potrebbe essere private ad esempio), nel momento in
-        cui ci provo -> illegalAccessException!
-        Tutti questi controlli non li abbiamo se usando il sistema di tipi statico! Usando Reflection sono possibili
-        tutte queste eccezioni
-        */
-        //Se cambiamo la visibilità di speed in Vechicle
+        /*con otteniamo un'eccezione :
         Field speedField = superclass.getField("speed");
         Vechicle v1 = new Vechicle(0.0);
         double d = speedField.getDouble(v1);
         System.out.println(d);
-        /*
-        boolean d = speedField.getBoolean(v1);
-        System.out.println(d);
-        Otterrei IllegalArgumentException in quanto stiamo provando ad accedere al campo speed dando
-        un booleano*/
+        E con getDeclaredFields?
+        Field speedField = superclass.getDeclaredField("speed"); //Questo vede speed!
+        Vechicle v1 = new Vechicle(0.0);
+        double d = speedField.getDouble(v1); //Questo fallisce
+        Perchè non siamo all'interno della classe Vechicle, bensì siamo in Race
+        Race non può accedere ad un membro privato di Vechicle
+        Possiamo però usare una tecnica tramite reflection che rompe TUTTI i concetti di encapsulation
+        setAccessible*/
+        Field speedField = superclass.getDeclaredField("speed");
+        Vechicle v1 = new Vechicle(0.0);
+        speedField.setAccessible(true); // se pongo true diventa tipo pubblico, possiamo farci quello che vogliamo
+        /*Così rendiamo accessibile speed*/
+        double d = speedField.getDouble(v1);
+        System.out.println(d); //Questo funziona!!
+        //Sono riuscito ad accedere ad un campo privato bypassando il compilatore
+        //Possiamo anche scrivere!
+        speedField.setDouble(v1,-100.0); //TERIBBBBILE
+        /*Dobbiamo precisare che setAccessible può essere usato in certe situazioni :
+        * -Se sono nello stesso modulo
+        * -Se sono public in entrambi i moduli
+        * */
+
     }
 
 }
