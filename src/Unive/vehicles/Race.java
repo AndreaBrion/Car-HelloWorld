@@ -5,7 +5,11 @@ import Unive.vehicles.fuel.*;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+
+import static java.lang.reflect.Modifier.isFinal;
+import static java.lang.reflect.Modifier.isPublic;
 
 public class Race<T extends Vechicle> {
         /**
@@ -113,7 +117,7 @@ public class Race<T extends Vechicle> {
         }
     }
 
-    public static void main(String[] args) throws ImpossibleAccellerateException, NoSuchFieldException, IllegalAccessException {
+    public static void main(String[] args) throws ImpossibleAccellerateException, NoSuchFieldException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
        /* FuelTypeCache cache = new FuelTypeCache();
         FuelType Petrol = new FuelType("Petrol", 1.4, 0.01);
         FuelType Diesel = new FuelType("Diesel", 1.3, 0.015);
@@ -130,32 +134,34 @@ public class Race<T extends Vechicle> {
         //Vediamo come ispezionare il contenuto della classe tramite Reflection
         Class v = Car.class; //v è un'stanza di classe che rappresenta Car
         Class superclass = v.getSuperclass();
-        /*con otteniamo un'eccezione :
-        Field speedField = superclass.getField("speed");
-        Vechicle v1 = new Vechicle(0.0);
-        double d = speedField.getDouble(v1);
-        System.out.println(d);
-        E con getDeclaredFields?
-        Field speedField = superclass.getDeclaredField("speed"); //Questo vede speed!
-        Vechicle v1 = new Vechicle(0.0);
-        double d = speedField.getDouble(v1); //Questo fallisce
-        Perchè non siamo all'interno della classe Vechicle, bensì siamo in Race
-        Race non può accedere ad un membro privato di Vechicle
-        Possiamo però usare una tecnica tramite reflection che rompe TUTTI i concetti di encapsulation
-        setAccessible*/
         Field speedField = superclass.getDeclaredField("speed");
         Vechicle v1 = new Vechicle(0.0);
-        speedField.setAccessible(true); // se pongo true diventa tipo pubblico, possiamo farci quello che vogliamo
-        /*Così rendiamo accessibile speed*/
-        double d = speedField.getDouble(v1);
-        System.out.println(d); //Questo funziona!!
-        //Sono riuscito ad accedere ad un campo privato bypassando il compilatore
-        //Possiamo anche scrivere!
-        speedField.setDouble(v1,-100.0); //TERIBBBBILE
-        /*Dobbiamo precisare che setAccessible può essere usato in certe situazioni :
-        * -Se sono nello stesso modulo
-        * -Se sono public in entrambi i moduli
-        * */
+        Method accellerateMethod = superclass.getMethod("accellerate", double.class); //campi
+        //con double.class è il tipo del parametro dato a accellerate -> utile per selezionare un metodo preciso
+        //accellerateMethod.invoke(v1, 1, 2, 3); //prende un Object e un elenco (qui di numeri) invoke usa l'elenco come input del metodo
+        //Qui compila, ma restituisce un'eccezione, come se facessimo
+        //accellerateMethod.invoke("pippo", 1, 2, 3);
+        accellerateMethod.invoke(v1, 1.0);
+        /*Così funziona! Se ponessi invece :
+         speedField.setAccessible(true);
+         speedField.setDouble(v1,-100.0);
+         accellerateMethod.invoke(v1, 1.0);
+        In quanto pongo la speed negativa ed il metodo accellerate lancia un'eccezione!*/
+        //Vediamo getModifiers
+        int i = accellerateMethod.getModifiers();
+        /*I modifiers sono una serie di costanti definite nella classe .java.lang.reflect.
+        * Ciascuno che ci rappresenta un valore in base a che sia public, final, interface, abstract ecc
+        il valore del public è 1!
+        Per capirlo possiamo usare
+         */
+        System.out.println(isPublic(i));
+        System.out.println(isFinal(i));
+        Car v2= new Car(0.0, new FuelType("diesel", 0.015, 0.01));
+        //accellerateMethod.invoke(v2, 1.0); //Questo lancerà eccezzione visto che l'auto non ha sufficiente
+        //benzina! Se infatti
+        v2.refuel(2);
+        accellerateMethod.invoke(v2, 1.0); //funziona!
+        System.out.println(v2);
 
     }
 
