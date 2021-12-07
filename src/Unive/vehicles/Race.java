@@ -3,6 +3,10 @@ import Unive.vehicles.autovehicles.*;
 import Unive.vehicles.fuel.FuelNotSufficientException;
 import Unive.vehicles.fuel.*;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+
 public class Race<T extends Vechicle> {
         /**
          * @param v1 first vehicle
@@ -110,7 +114,7 @@ public class Race<T extends Vechicle> {
     }
 
     public static void main(String[] args) throws ImpossibleAccellerateException {
-        FuelTypeCache cache = new FuelTypeCache();
+       /* FuelTypeCache cache = new FuelTypeCache();
         FuelType Petrol = new FuelType("Petrol", 1.4, 0.01);
         FuelType Diesel = new FuelType("Diesel", 1.3, 0.015);
         FuelTank two_lt = new FuelTank(Diesel, 2);
@@ -122,18 +126,42 @@ public class Race<T extends Vechicle> {
         Bicycle b = new Bicycle(0,1,1);
         Truck T = new Truck(Diesel);
         Race.new_race(B, b, 100);
+        */
+        //Vediamo come ispezionare il contenuto della classe tramite Reflection
+        Class v = Car.class; //v è un'stanza di classe che rappresenta Car
+        System.out.println(v.getName()); //ci stampa "è una classe Car"
+        for(Method m : v.getMethods())
+            System.out.println(m);
+        /*Questo ciclo ci stampa i metodi usabili e dove sono stati definiti
+        * Da notare che il metodo computeConsumedFuel non c'è nella lista
+        * Ciò perchè getMethods() ritorna tutti i metodi PUBBLICI*/
+        for(Method m : v.getDeclaredMethods())
+            System.out.println(m);
+        /*Questo invece stampa TUTTI i metodi, ciò mi fa vedere anche quello che è
+        privato -> Ecco perchè Reflection può causare problemi di Encapsulation!!
+        * */
+        for(Field f : v.getDeclaredFields())
+            System.out.println(f);
+        /*Questo invece stampa i campi, come sopra posso vedere i campi private -> problemi con Encapsulation*/
+        for(Field f : v.getFields())
+            System.out.println(f);
+        /*Questo invece stampa solo ciò che è pubblico e visibile, infatti qua non stampa nulla in quanto i
+        campi in Car : fuel e fuelType sono private e speed (che essendo private non viene ereditato)
+        * */
+        for(Constructor c : v.getConstructors())
+            System.out.println(c);
+        /*Questo stampa i costruttori visibili */
+        //Possiamo anche vedere cosa sta più in alto nella gerarchia delle classi
+        Class supercalss = v.getSuperclass();
+        for(Field f : v.getDeclaredFields())
+            System.out.println(f);
+        /*Questo stampa i campi della superclasse, inoltre vediamo anche se le assertion sono attive o no */
 
+        System.out.println(v.getPackage()); //Indica il package, dove posso vedere tutte le annotazioni, chi lo ha fatto
+        //ma non posso chiedere di restituirmi tutte le classi interne al package
 
-
-
-
-        //Car n = new Car(0 , new FuelType("diesel", 0, 0)); //Non da problemi
-        //n.accellerate(-100); //errore perchè velocità negativa
-       // n.accellerate(10); //errore perche non ha benzina!
-        /*
-        Throw è una keyword che va solo con sottotipi throwable, infatti fare
-        throw n; da errore
-         */
-
+        /*Infine possiamo chiedere cosa è effettivamente quel class (annotazione, array, interfaccia...) in
+        * quanto dato che posso scrivere .Class possiamo avere qualsiasi di queste cose*/
+        System.out.println(v.isInterface());
     }
 }
