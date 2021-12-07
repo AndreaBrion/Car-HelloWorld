@@ -117,7 +117,7 @@ public class Race<T extends Vechicle> {
         }
     }
 
-    public static void main(String[] args) throws ImpossibleAccellerateException, NoSuchFieldException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
+    public static void main(String[] args) throws ImpossibleAccellerateException, NoSuchFieldException, IllegalAccessException, NoSuchMethodException, InvocationTargetException, InstantiationException {
        /* FuelTypeCache cache = new FuelTypeCache();
         FuelType Petrol = new FuelType("Petrol", 1.4, 0.01);
         FuelType Diesel = new FuelType("Diesel", 1.3, 0.015);
@@ -134,34 +134,13 @@ public class Race<T extends Vechicle> {
         //Vediamo come ispezionare il contenuto della classe tramite Reflection
         Class v = Car.class; //v è un'stanza di classe che rappresenta Car
         Class superclass = v.getSuperclass();
-        Field speedField = superclass.getDeclaredField("speed");
-        Vechicle v1 = new Vechicle(0.0);
         Method accellerateMethod = superclass.getMethod("accellerate", double.class); //campi
-        //con double.class è il tipo del parametro dato a accellerate -> utile per selezionare un metodo preciso
-        //accellerateMethod.invoke(v1, 1, 2, 3); //prende un Object e un elenco (qui di numeri) invoke usa l'elenco come input del metodo
-        //Qui compila, ma restituisce un'eccezione, come se facessimo
-        //accellerateMethod.invoke("pippo", 1, 2, 3);
-        accellerateMethod.invoke(v1, 1.0);
-        /*Così funziona! Se ponessi invece :
-         speedField.setAccessible(true);
-         speedField.setDouble(v1,-100.0);
-         accellerateMethod.invoke(v1, 1.0);
-        In quanto pongo la speed negativa ed il metodo accellerate lancia un'eccezione!*/
-        //Vediamo getModifiers
-        int i = accellerateMethod.getModifiers();
-        /*I modifiers sono una serie di costanti definite nella classe .java.lang.reflect.
-        * Ciascuno che ci rappresenta un valore in base a che sia public, final, interface, abstract ecc
-        il valore del public è 1!
-        Per capirlo possiamo usare
-         */
-        System.out.println(isPublic(i));
-        System.out.println(isFinal(i));
-        Car v2= new Car(0.0, new FuelType("diesel", 0.015, 0.01));
-        //accellerateMethod.invoke(v2, 1.0); //Questo lancerà eccezzione visto che l'auto non ha sufficiente
-        //benzina! Se infatti
-        v2.refuel(2);
-        accellerateMethod.invoke(v2, 1.0); //funziona!
-        System.out.println(v2);
+        //Constructor VeConstructor = superclass.getConstructor(double.class);
+        //Vechicle v1 = VeConstructor.newInstance(10.0); così otteniamo errore, dobbiamo indicare il tipo
+        //su cui è parametrizzato
+        Constructor<Vechicle> VeConstructor = superclass.getConstructor(double.class);
+        Vechicle v1 = VeConstructor.newInstance(10.0);
+        System.out.println(v1.getSpeed());
 
     }
 
