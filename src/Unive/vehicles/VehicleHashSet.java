@@ -1,10 +1,13 @@
 package Unive.vehicles;
+import Unive.vehicles.animals.Carretto;
 import Unive.vehicles.autovehicles.Car;
 import Unive.vehicles.autovehicles.FuelTypeCache;
 import Unive.vehicles.autovehicles.Truck;
 import Unive.vehicles.fuel.FuelTank;
 import Unive.vehicles.fuel.FuelType;
 
+import java.nio.channels.ByteChannel;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 
@@ -33,23 +36,20 @@ public class VehicleHashSet<T extends Vechicle> extends HashSet<T> { //qui ho fi
             }//Questo accellera ogni Vechicle
         }
     }
+
     public static void main (String[] args) throws ImpossibleAccellerateException {
-        VehicleHashSet set = new VehicleHashSet<Vechicle>();
-        FuelTypeCache cache = new FuelTypeCache();
-        FuelType Petrol = new FuelType("Petrol", 1.4, 0.01);
-        FuelType Diesel = new FuelType("Diesel", 1.3, 0.015);
-        FuelTank two_lt = new FuelTank(Diesel, 2);
-        FuelTank two_lt2 = new FuelTank(Diesel, 2);
-        FuelTank three_lt = new FuelTank(Petrol, 2);
-        Car C = new Car(0, cache.getFuelTypeFromName("Diesel"));
-        Car Y = new Car(0, cache.getFuelTypeFromName("Petrol"));
-        Bicycle B = new Bicycle(10, 1, 1);
-        Truck T = new Truck(Diesel);
-        set.add(new Bicycle(10));
-        set.add(C);
-        set.add(Y);
-        set.add(B);
-        set.add(T);
-        Vechicle winner = set.new_race(100.0);
+        Collection<Class> allVehicles = getAllVechiclesClasses();
+        for(Class c : allVehicles) {
+            System.out.println(c.getName());
+        }
+
+    }
+    static private Collection<Class> getAllVechiclesClasses() {
+        HashSet<Class> result = new HashSet<>();
+        result.add(Bicycle.class);
+        result.add(Car.class);
+        result.add(Truck.class);
+        result.add(Carretto.class);
+        return result;
     }
 }
