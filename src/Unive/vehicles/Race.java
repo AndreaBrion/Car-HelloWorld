@@ -117,6 +117,38 @@ public class Race<T extends Vechicle> {
         }
     }
 
+    void assignSpeed(Vechicle v1, Vechicle v2) throws IllegalAccessException {
+        //prendiamo il campo speed di v1, dove il tipo statico è Vechicle, però potrebbe essere Truck o altro,
+        //quindi dovrò avere
+        Field speedField = getSpeedField(v1.getClass());
+        speedField.setAccessible(true);
+        Speed fromSpeedAnnotation = speedField.getDeclaredAnnotation(Speed.class);
+        String from = fromSpeedAnnotation.type();
+        //Questo lo possiamo rifare per v2
+        Field speedField_2 = getSpeedField(v2.getClass());
+        speedField_2.setAccessible(true);
+        Speed fromSpeedAnnotation_2 = speedField_2.getDeclaredAnnotation(Speed.class);
+        String from_2 = fromSpeedAnnotation_2.type();
+
+        speedField_2.setDouble(v2, convert(speedField.getDouble(v1), from, from_2));
+    }
+
+    private double convert(double aDouble, String from, String from_2) {
+        return 1.0;
+    }
+
+    private Field getSpeedField(Class aClass) {
+        try {
+            Field f = aClass.getDeclaredField("speed");
+        } catch (NoSuchFieldException e) {
+            return getSpeedField(aClass.getSuperclass());
+        }
+    }
+
+    double getSpeed(Vechicle v) {
+
+    }
+
     public static void main(String[] args) throws ImpossibleAccellerateException, NoSuchFieldException, IllegalAccessException, NoSuchMethodException, InvocationTargetException, InstantiationException {
        /* FuelTypeCache cache = new FuelTypeCache();
         FuelType Petrol = new FuelType("Petrol", 1.4, 0.01);
