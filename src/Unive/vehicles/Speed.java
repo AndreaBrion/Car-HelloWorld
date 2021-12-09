@@ -4,8 +4,8 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-    //Così poniamo il livello al codice sorgente
-    @Retention(RetentionPolicy.SOURCE)
+    //Così poniamo il livello durante l'esecuzione
+    @Retention(RetentionPolicy.RUNTIME)
     /*@Target è un'annotazione in cui possiamo definire un array di ElementType (tipo, campo, metodo,
     parametro, costruttore e variabile locale)
     * */

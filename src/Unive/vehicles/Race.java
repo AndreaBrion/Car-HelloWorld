@@ -130,7 +130,7 @@ public class Race<T extends Vechicle> {
         Bicycle b = new Bicycle(0,1,1);
         Truck T = new Truck(Diesel);
         Race.new_race(B, b, 100);
-        */
+
         //Vediamo come ispezionare il contenuto della classe tramite Reflection
         Class v = Car.class; //v è un'stanza di classe che rappresenta Car
         Class superclass = v.getSuperclass();
@@ -141,7 +141,26 @@ public class Race<T extends Vechicle> {
         Constructor<Vechicle> VeConstructor = superclass.getConstructor(double.class);
         Vechicle v1 = VeConstructor.newInstance(10.0);
         System.out.println(v1.getSpeed());
-
+        */
+        Class classVehicle = Vechicle.class;
+        Field s = classVehicle.getDeclaredField("speed"); //prima devo tirare fuori il campo
+        boolean annotated = s.isAnnotationPresent(Speed.class); //preso il campo posso controllare se è presente l'annotazione @Speed
+        Speed speedAnnotation = (Speed) s.getAnnotation(Speed.class);
+        /*Questo da errore in quanto speedAnnotations è null in quanto annotated risulta false!
+        * Nonostante il campo speed sia annotato con @Speed, ricordiamo che in Speed.java
+        * abbiamo posto "@Retention(RetentionPolicy.SOURCE)" con la quale indico che è visibile solo
+        * nel codice sorgente
+        * Non è visibile durante compilazione o esecuzione!
+        * dobbiamo porre @Retention(RetentionPolicy.RUNTIME)
+        * Ciò che ottniamo con getAnnotations(Speed.class) è un qualcosa di tipo Speed
+        * Speed è la nostra definizione di annotazione, quando diciamo al compilatore :
+        * public @interface Speed...
+        * @interface viene compilato come una classe che estende annotations -> abbiamo a tuttu gli effetti un tipo
+        * Infatti speedAnnotations ha i 2 attributi definiti in Speed, con valori concreti!
+        * Possiamo così accedere ai valori delle annotazioni
+        * */
+        String type = speedAnnotation.type();
+        boolean forward = speedAnnotation.forward();
     }
 
 }

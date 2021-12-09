@@ -1,6 +1,8 @@
 package Unive.vehicles;
 
 public class Vechicle { //astratta visto il metodo accelerate
+    @Speed(forward = true) //aggiunto perchè altrimenti @Speed/speed non viene visto dal main di race
+    //altrimenti s.isAnnotationPresent(Speed.class) ritorna sempre false
     private double speed = 0;
     /**
      * Accelerate the vehicle of the given amount of km/h
