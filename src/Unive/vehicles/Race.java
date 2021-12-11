@@ -116,7 +116,7 @@ public class Race<T extends Vechicle> {
             v2.fullBrake();
         }
     }
-
+/*
     void assignSpeed(Vechicle v1, Vechicle v2) throws IllegalAccessException {
         //prendiamo il campo speed di v1, dove il tipo statico è Vechicle, però potrebbe essere Truck o altro,
         //quindi dovrò avere
@@ -137,7 +137,7 @@ public class Race<T extends Vechicle> {
         return 1.0;
     }
 
-    private Field getSpeedField(Class aClass) {
+    private static Field getSpeedField(Class aClass) {
         try {
             Field f = aClass.getDeclaredField("speed");
         } catch (NoSuchFieldException e) {
@@ -146,9 +146,9 @@ public class Race<T extends Vechicle> {
     }
 
     double getSpeed(Vechicle v) {
-
+        return 0.0;
     }
-
+*/
     public static void main(String[] args) throws ImpossibleAccellerateException, NoSuchFieldException, IllegalAccessException, NoSuchMethodException, InvocationTargetException, InstantiationException {
        /* FuelTypeCache cache = new FuelTypeCache();
         FuelType Petrol = new FuelType("Petrol", 1.4, 0.01);
