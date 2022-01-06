@@ -150,9 +150,11 @@ public class Race<T extends Vechicle> {
     }
 */
     public static void main(String[] args) throws ImpossibleAccellerateException, NoSuchFieldException, IllegalAccessException, NoSuchMethodException, InvocationTargetException, InstantiationException {
-       /* FuelTypeCache cache = new FuelTypeCache();
+        FuelTypeCache cache = new FuelTypeCache();
         FuelType Petrol = new FuelType("Petrol", 1.4, 0.01);
         FuelType Diesel = new FuelType("Diesel", 1.3, 0.015);
+        cache.put(Petrol.getType(), Petrol.getCostPerLiter(), Petrol.getLtperKmh());
+        cache.put(Diesel.getType(), Diesel.getCostPerLiter(), Diesel.getLtperKmh());
         FuelTank two_lt = new FuelTank(Diesel, 2);
         FuelTank two_lt2 = new FuelTank(Diesel, 2);
         FuelTank three_lt = new FuelTank(Petrol, 2);
@@ -162,7 +164,7 @@ public class Race<T extends Vechicle> {
         Bicycle b = new Bicycle(0,1,1);
         Truck T = new Truck(Diesel);
         Race.new_race(B, b, 100);
-
+/*
         //Vediamo come ispezionare il contenuto della classe tramite Reflection
         Class v = Car.class; //v è un'stanza di classe che rappresenta Car
         Class superclass = v.getSuperclass();
@@ -173,7 +175,7 @@ public class Race<T extends Vechicle> {
         Constructor<Vechicle> VeConstructor = superclass.getConstructor(double.class);
         Vechicle v1 = VeConstructor.newInstance(10.0);
         System.out.println(v1.getSpeed());
-        */
+
         Class classVehicle = Vechicle.class;
         Field s = classVehicle.getDeclaredField("speed"); //prima devo tirare fuori il campo
         boolean annotated = s.isAnnotationPresent(Speed.class); //preso il campo posso controllare se è presente l'annotazione @Speed
@@ -190,9 +192,10 @@ public class Race<T extends Vechicle> {
         * @interface viene compilato come una classe che estende annotations -> abbiamo a tuttu gli effetti un tipo
         * Infatti speedAnnotations ha i 2 attributi definiti in Speed, con valori concreti!
         * Possiamo così accedere ai valori delle annotazioni
-        * */
+        *
         String type = speedAnnotation.type();
         boolean forward = speedAnnotation.forward();
+        */
     }
 
 }
